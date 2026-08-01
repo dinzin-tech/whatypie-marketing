@@ -1,0 +1,9 @@
+composer.lock
+vendor
+storage
+node_modules
+package-lock.json
+public/assets/css
+public/assets/js
+cache
+.env

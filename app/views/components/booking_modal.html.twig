@@ -1,0 +1,44 @@
+  <!-- ==================== STRATEGY CALL BOOKING MODAL ==================== -->
+  <div id="bookingModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="relative w-full max-w-xl bg-slate-900 border border-emerald-500/30 rounded-3xl p-6 md:p-8 text-white shadow-2xl space-y-6">
+      <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white font-bold text-lg">✕</button>
+
+      <div id="modalFormContainer">
+        <h3 class="text-2xl font-bold text-white">Book Your Free AI Strategy Call</h3>
+        <p class="text-xs text-slate-400 mt-1">Audit your business operations with our lead AI automation architects.</p>
+
+        <form onsubmit="handleFormSubmit(event)" class="space-y-4 mt-6">
+          <div>
+            <label class="block text-xs text-slate-300 mb-1">Full Name *</label>
+            <input required type="text" placeholder="John Doe" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
+          </div>
+
+          <div>
+            <label class="block text-xs text-slate-300 mb-1">Work Email *</label>
+            <input required type="email" placeholder="john@company.com" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
+          </div>
+
+          <div>
+            <label class="block text-xs text-slate-300 mb-1">Phone Number *</label>
+            <input required type="tel" placeholder="+91 98765 43210" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
+          </div>
+
+          <div>
+            <label class="block text-xs text-slate-300 mb-1">Company Name *</label>
+            <input required type="text" placeholder="Acme Corp" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
+          </div>
+
+          <button type="submit" class="w-full py-3 bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 text-white font-bold text-sm rounded-xl shadow-lg hover:scale-[1.01] transition">
+            Confirm & Book Session
+          </button>
+        </form>
+      </div>
+
+      <div id="modalSuccessContainer" class="hidden text-center py-8 space-y-4">
+        <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">✓</div>
+        <h4 class="text-2xl font-bold text-white">Strategy Session Requested!</h4>
+        <p class="text-xs text-slate-300 max-w-sm mx-auto">Our lead AI solutions architect will contact you within 2 hours to confirm your calendar booking.</p>
+        <button onclick="closeModal()" class="px-6 py-2 bg-slate-800 text-white rounded-xl text-xs">Close</button>
+      </div>
+    </div>
+  </div>

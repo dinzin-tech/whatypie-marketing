@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WhatyPie — AI Automation & Business Transformation Company{% endblock %}
+
+{% block stylesheets %}
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #020617;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #059669;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #10b981;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="bg-slate-950 text-slate-100 font-sans selection:bg-emerald-500 selection:text-slate-950 antialiased overflow-x-hidden">
+
+  {% include 'components/header.html.twig' %}
+
+  {% include 'home/sections/hero_section.html.twig' %}
+
+  {% include 'home/sections/services_section.html.twig' %}
+
+  {% include 'home/sections/transformation_section.html.twig' %}
+
+  {% include 'home/sections/why_us_section.html.twig' %}
+
+  {% include 'home/sections/cta_section.html.twig' %}
+
+  {% include 'components/footer.html.twig' %}
+
+  {% include 'components/booking_modal.html.twig' %}
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+  <!-- JavaScript Interaction Logic -->
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    function openModal() {
+      const modal = document.getElementById('bookingModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('bookingModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      document.getElementById('modalFormContainer').classList.add('hidden');
+      document.getElementById('modalSuccessContainer').classList.remove('hidden');
+    }
+  </script>
+{% endblock %}

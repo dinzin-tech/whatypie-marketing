@@ -1,0 +1,49 @@
+  <!-- ==================== HEADER / NAVIGATION ==================== -->
+  <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-slate-950/90 backdrop-blur-xl border-b border-emerald-500/20 py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center space-x-3 group">
+        <img src="{{ assets('whatypie-logo.png') }}" alt="WhatyPie Logo" class="h-12 sm:h-14 w-auto object-contain drop-shadow-lg group-hover:scale-105 transition-transform duration-300" />
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden lg:flex items-center space-x-1 bg-slate-900/80 p-1.5 rounded-full border border-slate-800 backdrop-blur-md">
+        <a href="#services" class="px-4 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-emerald-950/80 hover:text-emerald-300 rounded-full transition">Services</a>
+        <a href="#solutions" class="px-4 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-emerald-950/80 hover:text-emerald-300 rounded-full transition">Solutions</a>
+        <a href="#industries" class="px-4 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-emerald-950/80 hover:text-emerald-300 rounded-full transition">Industries</a>
+        <a href="#process" class="px-4 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-emerald-950/80 hover:text-emerald-300 rounded-full transition">Process</a>
+        <a href="#why-us" class="px-4 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-emerald-950/80 hover:text-emerald-300 rounded-full transition">Why Us</a>
+        <a href="#platform" class="px-4 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-emerald-950/80 hover:text-emerald-300 rounded-full transition">Platform</a>
+        <a href="#case-studies" class="px-4 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-emerald-950/80 hover:text-emerald-300 rounded-full transition">Case Studies</a>
+        <a href="#faq" class="px-4 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-emerald-950/80 hover:text-emerald-300 rounded-full transition">FAQ</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="hidden lg:flex items-center space-x-3">
+        <button onclick="openModal()" class="px-5 py-2.5 bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs rounded-full shadow-lg shadow-emerald-600/30 hover:scale-105 transition">
+          Book AI Strategy Call
+        </button>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-slate-950/95 border-b border-slate-800 px-4 pt-4 pb-6 space-y-3">
+      <a href="#services" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm text-slate-200 hover:bg-emerald-950/60 rounded-xl">Services</a>
+      <a href="#solutions" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm text-slate-200 hover:bg-emerald-950/60 rounded-xl">Solutions</a>
+      <a href="#industries" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm text-slate-200 hover:bg-emerald-950/60 rounded-xl">Industries</a>
+      <a href="#process" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm text-slate-200 hover:bg-emerald-950/60 rounded-xl">Process</a>
+      <a href="#why-us" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm text-slate-200 hover:bg-emerald-950/60 rounded-xl">Why Us</a>
+      <a href="#platform" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm text-slate-200 hover:bg-emerald-950/60 rounded-xl">Platform</a>
+      <a href="#case-studies" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm text-slate-200 hover:bg-emerald-950/60 rounded-xl">Case Studies</a>
+      <a href="#faq" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm text-slate-200 hover:bg-emerald-950/60 rounded-xl">FAQ</a>
+      <button onclick="toggleMobileMenu(); openModal();" class="w-full py-3 bg-emerald-600 text-white font-bold text-sm rounded-xl shadow-lg">
+        Book Free AI Strategy Call
+      </button>
+    </div>
+  </header>
