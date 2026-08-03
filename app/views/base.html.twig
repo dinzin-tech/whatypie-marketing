@@ -11,6 +11,15 @@
     <link rel="canonical" href="{% block canonical %}https://whatypie.in/{% endblock %}" />
     <meta name="description" content="{% block meta_description %}WhatyPie designs, builds, and manages AI-powered automation systems that streamline operations, reduce costs, and accelerate business growth.{% endblock %}" />
     {% block stylesheets %}{% endblock %}
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CL00EYQZL6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CL00EYQZL6');
+</script>
 </head>
 <body>
     {% block header %}
