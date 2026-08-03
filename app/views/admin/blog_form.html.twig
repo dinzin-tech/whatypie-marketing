@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ post ? 'Edit Post' : 'New Post' }} — WhatyPie Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    #ai-spinner { display: none; }
+    .generating #ai-spinner { display: inline-block; }
+    .generating #ai-btn-text { display: none; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen p-8">
+
+  <div class="max-w-3xl mx-auto">
+    <div class="flex items-center gap-4 mb-8">
+      <a href="/admin?tab=blogs" class="text-slate-400 hover:text-white text-sm transition">← Back</a>
+      <h1 class="text-xl font-bold text-white">{{ post ? 'Edit Post' : 'New Blog Post' }}</h1>
+    </div>
+
+    {% if error %}
+      <div class="mb-6 px-4 py-3 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-sm">{{ error }}</div>
+    {% endif %}
+
+    <!-- AI Generate Panel -->
+    <div class="mb-5 bg-slate-900 border border-emerald-500/30 rounded-2xl p-5 space-y-3">
+      <div class="flex items-center gap-2">
+        <span class="text-emerald-400 text-sm font-semibold">✦ AI Content Generator</span>
+        <span class="text-xs text-slate-500">Powered by OpenRouter</span>
+      </div>
+      <div class="flex gap-3">
+        <input type="text" id="ai-topic" placeholder="Enter a topic or leave blank to auto-pick…"
+          class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500" />
+        <button type="button" id="ai-generate-btn" onclick="generateWithAI()"
+          class="px-5 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold text-sm rounded-xl transition flex items-center gap-2 whitespace-nowrap">
+          <svg id="ai-spinner" class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+          </svg>
+          <span id="ai-btn-text">✦ Generate with AI</span>
+        </button>
+      </div>
+      <div id="ai-error" class="hidden text-xs text-red-400 px-1"></div>
+    </div>
+
+    <form method="POST"
+      action="{{ post ? '/admin/blog/edit/' ~ post.id : '/admin/blog/create' }}"
+      enctype="multipart/form-data"
+      class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-5">
+
+      <div>
+        <label class="block text-xs text-slate-400 mb-1.5">Title *</label>
+        <input type="text" name="title" id="field-title" required value="{{ post ? post.title : '' }}"
+          class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
+      </div>
+
+      <div>
+        <label class="block text-xs text-slate-400 mb-1.5">Excerpt *</label>
+        <textarea name="excerpt" id="field-excerpt" required rows="2"
+          class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500 resize-none">{{ post ? post.excerpt : '' }}</textarea>
+      </div>
+
+      <div>
+        <label class="block text-xs text-slate-400 mb-1.5">Content *</label>
+        <textarea name="content" id="field-content" required rows="16"
+          class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500 resize-y font-mono text-xs leading-relaxed">{{ post ? post.content : '' }}</textarea>
+      </div>
+
+      <!-- Featured Image -->
+      <div class="space-y-2">
+        <label class="block text-xs text-slate-400 mb-1.5">Featured Image</label>
+
+        {% if post and post.featured_image %}
+          <div class="mb-2">
+            <img src="{{ post.featured_image }}" alt="Current" class="h-28 rounded-xl object-cover border border-slate-700" />
+            <p class="text-xs text-slate-500 mt-1">Current image. Upload a new one to replace it.</p>
+          </div>
+        {% endif %}
+
+        <!-- Upload tab -->
+        <div class="flex gap-2 mb-2" id="img-tabs">
+          <button type="button" onclick="switchImgTab('upload')" id="tab-upload"
+            class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 text-white transition">Upload File</button>
+          <button type="button" onclick="switchImgTab('url')" id="tab-url"
+            class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-slate-400 hover:text-white transition">Paste URL</button>
+        </div>
+
+        <div id="img-upload-panel">
+          <input type="file" name="featured_image_file" accept="image/jpeg,image/png,image/webp,image/gif"
+            class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-300 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-emerald-600 file:text-white file:text-xs file:font-semibold cursor-pointer" />
+          <p class="text-xs text-slate-600 mt-1">JPG, PNG, WebP or GIF. Max 5MB.</p>
+        </div>
+
+        <div id="img-url-panel" class="hidden">
+          <input type="text" name="featured_image" value="{{ post ? post.featured_image : '' }}"
+            placeholder="https://…"
+            class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs text-slate-400 mb-1.5">Media (JSON array)</label>
+        <textarea name="media" rows="2" placeholder='[{"type":"youtube","url":"https://youtu.be/..."}]'
+          class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500 resize-none font-mono text-xs">{{ post ? post.media : '' }}</textarea>
+      </div>
+
+      <div>
+        <label class="block text-xs text-slate-400 mb-1.5">Status</label>
+        <select name="status" class="bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+          <option value="draft" {{ (not post or post.status == 'draft') ? 'selected' : '' }}>Draft</option>
+          <option value="published" {{ (post and post.status == 'published') ? 'selected' : '' }}>Published</option>
+        </select>
+      </div>
+
+      <div class="flex gap-3 pt-2">
+        <button type="submit" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm rounded-xl transition">
+          {{ post ? 'Save Changes' : 'Create Post' }}
+        </button>
+        <a href="/admin?tab=blogs" class="px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-sm rounded-xl transition">Cancel</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function switchImgTab(tab) {
+      const uploadPanel = document.getElementById('img-upload-panel');
+      const urlPanel    = document.getElementById('img-url-panel');
+      const tabUpload   = document.getElementById('tab-upload');
+      const tabUrl      = document.getElementById('tab-url');
+
+      if (tab === 'upload') {
+        uploadPanel.classList.remove('hidden');
+        urlPanel.classList.add('hidden');
+        tabUpload.className = 'px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 text-white transition';
+        tabUrl.className    = 'px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-slate-400 hover:text-white transition';
+      } else {
+        uploadPanel.classList.add('hidden');
+        urlPanel.classList.remove('hidden');
+        tabUrl.className    = 'px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 text-white transition';
+        tabUpload.className = 'px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-slate-400 hover:text-white transition';
+      }
+    }
+
+    async function generateWithAI() {
+      const btn     = document.getElementById('ai-generate-btn');
+      const errorEl = document.getElementById('ai-error');
+      const topic   = document.getElementById('ai-topic').value.trim();
+
+      btn.classList.add('generating');
+      btn.disabled = true;
+      errorEl.classList.add('hidden');
+
+      try {
+        const res  = await fetch('/admin/blog/ai-generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ topic }),
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          document.getElementById('field-title').value   = data.title   || '';
+          document.getElementById('field-excerpt').value = data.excerpt || '';
+          document.getElementById('field-content').value = data.content || '';
+        } else {
+          errorEl.textContent = data.error || 'Generation failed.';
+          errorEl.classList.remove('hidden');
+        }
+      } catch (e) {
+        errorEl.textContent = 'Network error. Please try again.';
+        errorEl.classList.remove('hidden');
+      } finally {
+        btn.classList.remove('generating');
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

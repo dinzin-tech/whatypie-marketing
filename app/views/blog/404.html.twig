@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title %}Post Not Found | WhatyPie Blog{% endblock %}
+{% block stylesheets %}
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-serif'] } } } }</script>
+{% endblock %}
+{% block content %}
+<div class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col">
+  {% include 'components/header.html.twig' %}
+  <div class="flex-1 flex items-center justify-center px-4 text-center space-y-6 flex-col pt-24">
+    <div class="text-7xl">📭</div>
+    <h1 class="text-3xl font-extrabold text-white">Post Not Found</h1>
+    <p class="text-slate-400 max-w-sm">This article doesn't exist or may have been removed.</p>
+    <a href="/blog" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-2xl transition">← Back to Blog</a>
+  </div>
+  {% include 'components/footer.html.twig' %}
+</div>
+{% endblock %}
+{% block javascripts %}
+<script>
+  function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('hidden'); }
+  function openModal() {}
+  function closeModal() {}
+</script>
+{% endblock %}

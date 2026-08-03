@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — WhatyPie</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+
+  <div class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-60 bg-slate-900 border-r border-slate-800 flex flex-col fixed h-full z-10">
+      <div class="px-6 py-6 border-b border-slate-800">
+        <img src="{{ assets('whatypie-logo.png') }}" alt="WhatyPie" class="h-10" />
+        <p class="text-xs text-slate-500 mt-2">Admin Panel</p>
+      </div>
+
+      <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+        {% set navItems = [
+          { tab: 'blogs',      href: '/admin/blogs',      icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z', label: 'Blog Posts' },
+          { tab: 'contacts',   href: '/admin/contacts',   icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z', label: 'Contact Forms' },
+          { tab: 'bookings',   href: '/admin/bookings',   icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z', label: 'Strategy Calls' },
+          { tab: 'migrations', href: '/admin/migrations', icon: 'M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4', label: 'Migrations' },
+          { tab: 'crons',      href: '/admin/crons',      icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z', label: 'Cron Jobs' },
+          { tab: 'logs',       href: '/admin/logs',       icon: 'M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z', label: 'Logs' },
+          { tab: 'mails',      href: '/admin/mails',      icon: 'M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76', label: 'Mails' }
+        ] %}
+        {% for item in navItems %}
+          <a href="{{ item.href }}"
+            class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition {{ tab == item.tab ? 'bg-emerald-600/20 text-emerald-400' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ item.icon }}"/>
+            </svg>
+            {{ item.label }}
+          </a>
+        {% endfor %}
+      </nav>
+
+      <div class="px-3 py-4 border-t border-slate-800">
+        <div class="px-3 py-2 mb-2">
+          <p class="text-xs text-slate-400">Signed in as</p>
+          <p class="text-sm font-medium text-white truncate">{{ admin_username }}</p>
+          <span class="text-xs text-emerald-400 capitalize">{{ admin_role }}</span>
+        </div>
+        <a href="/admin/logout" class="flex items-center gap-2 px-3 py-2 text-sm text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="ml-60 flex-1 p-8 min-w-0">
+
+      {# ── BLOGS ── #}
+      {% if tab == 'blogs' %}
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-xl font-bold text-white">Blog Posts <span class="text-sm font-normal text-slate-500">({{ pagination.total }} total)</span></h2>
+          <a href="/admin/blog/create" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-xl transition">+ New Post</a>
+        </div>
+
+        {% if posts is empty %}
+          <div class="text-center py-20 text-slate-500">No blog posts yet.</div>
+        {% else %}
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-slate-800 text-slate-400 text-xs uppercase tracking-wide">
+                  <th class="text-left px-5 py-3">Title</th>
+                  <th class="text-left px-5 py-3">Status</th>
+                  <th class="text-left px-5 py-3">Date</th>
+                  <th class="px-5 py-3"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for post in posts %}
+                <tr class="border-b border-slate-800/50 hover:bg-slate-800/30 transition">
+                  <td class="px-5 py-4">
+                    <p class="font-medium text-white">{{ post.title }}</p>
+                    <p class="text-xs text-slate-500 mt-0.5">/{{ post.slug }}</p>
+                  </td>
+                  <td class="px-5 py-4">
+                    <span class="px-2.5 py-1 rounded-full text-xs font-medium {{ post.status == 'published' ? 'bg-emerald-500/15 text-emerald-400' : 'bg-slate-700 text-slate-400' }}">
+                      {{ post.status|capitalize }}
+                    </span>
+                  </td>
+                  <td class="px-5 py-4 text-slate-400 text-xs">{{ post.created_at }}</td>
+                  <td class="px-5 py-4 text-right space-x-3">
+                    <a href="/blog/{{ post.slug }}" target="_blank" class="text-xs text-slate-500 hover:text-white transition">View</a>
+                    <a href="/admin/blog/edit/{{ post.id }}" class="text-xs text-slate-400 hover:text-white transition">Edit</a>
+                    <form method="POST" action="/admin/blog/delete/{{ post.id }}" class="inline" onsubmit="return confirm('Delete this post?')">
+                      <button type="submit" class="text-xs text-red-400 hover:text-red-300 transition">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {{ _self.pager(pagination) }}
+        {% endif %}
+
+      {# ── CONTACTS ── #}
+      {% elseif tab == 'contacts' %}
+        <h2 class="text-xl font-bold text-white mb-6">Contact Submissions <span class="text-sm font-normal text-slate-500">({{ pagination.total }} total)</span></h2>
+
+        {% if contacts is empty %}
+          <div class="text-center py-20 text-slate-500">No contact submissions yet.</div>
+        {% else %}
+          <div class="space-y-4">
+            {% for contact in contacts %}
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+              <div class="flex items-start justify-between gap-4">
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-3 mb-1">
+                    <p class="font-semibold text-white">{{ contact.name }}</p>
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium
+                      {{ contact.status == 'unread' ? 'bg-amber-500/15 text-amber-400' :
+                         contact.status == 'replied' ? 'bg-emerald-500/15 text-emerald-400' :
+                         'bg-slate-700 text-slate-400' }}">
+                      {{ contact.status|capitalize }}
+                    </span>
+                  </div>
+                  <p class="text-xs text-slate-400">{{ contact.email }}{% if contact.subject %} · {{ contact.subject }}{% endif %}</p>
+                  <p class="text-sm text-slate-300 mt-2">{{ contact.message }}</p>
+                  <p class="text-xs text-slate-600 mt-2">{{ contact.created_at }}</p>
+                </div>
+              </div>
+              <form method="POST" action="/admin/contact/reply/{{ contact.id }}" class="mt-4 flex gap-3">
+                <input type="text" name="reply_message" placeholder="Type a reply (leave blank to mark as read)…"
+                  class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500" />
+                <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-xl transition whitespace-nowrap">
+                  {{ contact.status == 'unread' ? 'Mark Read / Reply' : 'Reply Again' }}
+                </button>
+              </form>
+            </div>
+            {% endfor %}
+          </div>
+          {{ _self.pager(pagination) }}
+        {% endif %}
+
+      {# ── BOOKINGS ── #}
+      {% elseif tab == 'bookings' %}
+        <h2 class="text-xl font-bold text-white mb-6">AI Strategy Call Bookings <span class="text-sm font-normal text-slate-500">({{ pagination.total }} total)</span></h2>
+
+        {% if bookings is empty %}
+          <div class="text-center py-20 text-slate-500">No strategy call bookings yet.</div>
+        {% else %}
+          <div class="space-y-4">
+            {% for booking in bookings %}
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <p class="font-semibold text-white">{{ booking.full_name }}</p>
+                  <p class="text-xs text-slate-400 mt-0.5">{{ booking.work_email }} · {{ booking.phone_number }}</p>
+                  <p class="text-xs text-slate-500 mt-0.5">{{ booking.company_name }}</p>
+                </div>
+                <div class="text-right">
+                  <span class="px-2.5 py-1 rounded-full text-xs font-medium
+                    {{ booking.status == 'pending' ? 'bg-amber-500/15 text-amber-400' :
+                       booking.status == 'scheduled' ? 'bg-emerald-500/15 text-emerald-400' :
+                       'bg-blue-500/15 text-blue-400' }}">
+                    {{ booking.status|capitalize }}
+                  </span>
+                  <p class="text-xs text-slate-600 mt-1">{{ booking.created_at }}</p>
+                </div>
+              </div>
+              {% if booking.admin_notes %}
+                <p class="text-xs text-slate-400 bg-slate-800 rounded-xl px-3 py-2 mb-3">📝 {{ booking.admin_notes }}</p>
+              {% endif %}
+              <form method="POST" action="/admin/booking/update/{{ booking.id }}" class="flex flex-wrap gap-3">
+                <select name="status" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500">
+                  <option value="pending"   {{ booking.status == 'pending'   ? 'selected' : '' }}>Pending</option>
+                  <option value="contacted" {{ booking.status == 'contacted' ? 'selected' : '' }}>Contacted</option>
+                  <option value="scheduled" {{ booking.status == 'scheduled' ? 'selected' : '' }}>Scheduled</option>
+                </select>
+                <input type="text" name="admin_notes" value="{{ booking.admin_notes }}" placeholder="Admin notes…"
+                  class="flex-1 min-w-0 bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500" />
+                <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-xl transition">Update</button>
+              </form>
+            </div>
+            {% endfor %}
+          </div>
+          {{ _self.pager(pagination) }}
+        {% endif %}
+
+      {# ── MIGRATIONS ── #}
+      {% elseif tab == 'migrations' %}
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-xl font-bold text-white">Migrations</h2>
+          <span class="text-xs text-slate-500">{{ migrations|length }} file(s) found</span>
+        </div>
+
+        {% if migrations is empty %}
+          <div class="text-center py-20 text-slate-500">No migration files found.</div>
+        {% else %}
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-slate-800 text-slate-400 text-xs uppercase tracking-wide">
+                  <th class="text-left px-5 py-3">Migration</th>
+                  <th class="text-left px-5 py-3">Status</th>
+                  <th class="text-left px-5 py-3">Ran At</th>
+                  <th class="px-5 py-3"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for m in migrations %}
+                <tr class="border-b border-slate-800/50" id="mrow-{{ loop.index }}">
+                  <td class="px-5 py-4">
+                    <p class="font-medium text-white">{{ m.label }}</p>
+                    <p class="text-xs text-slate-500 font-mono mt-0.5">{{ m.file }}</p>
+                  </td>
+                  <td class="px-5 py-4">
+                    <span id="mstatus-{{ loop.index }}" class="px-2.5 py-1 rounded-full text-xs font-medium {{ m.ran ? 'bg-emerald-500/15 text-emerald-400' : 'bg-slate-700 text-slate-400' }}">
+                      {{ m.ran ? 'Ran' : 'Pending' }}
+                    </span>
+                  </td>
+                  <td class="px-5 py-4 text-slate-400 text-xs" id="mdate-{{ loop.index }}">
+                    {{ m.ran_at ?? '—' }}
+                  </td>
+                  <td class="px-5 py-4 text-right">
+                    {% if not m.ran %}
+                      <button
+                        onclick="runMigration('{{ m.file }}', {{ loop.index }}, 'run')"
+                        id="mbtn-{{ loop.index }}"
+                        class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg transition">
+                        Run
+                      </button>
+                    {% else %}
+                      <button
+                        onclick="runMigration('{{ m.file }}', {{ loop.index }}, 'rollback')"
+                        id="mbtn-{{ loop.index }}"
+                        class="px-3 py-1.5 bg-red-600/80 hover:bg-red-500 text-white text-xs font-semibold rounded-lg transition"
+                        onclick="return confirm('Rollback {{ m.label }}? This may drop tables or data.')">
+                        Rollback
+                      </button>
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% endif %}
+
+        <script>
+        function runMigration(file, idx, action) {
+          const btn    = document.getElementById('mbtn-' + idx);
+          const status = document.getElementById('mstatus-' + idx);
+          const date   = document.getElementById('mdate-' + idx);
+
+          if (action === 'rollback' && !confirm('Rollback "' + file + '"?\nThis may drop tables or data.')) return;
+
+          btn.disabled    = true;
+          btn.textContent = action === 'run' ? 'Running…' : 'Rolling back…';
+
+          fetch('/admin/migration/' + action, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'file=' + encodeURIComponent(file)
+          })
+          .then(r => r.json())
+          .then(data => {
+            if (data.success) {
+              if (action === 'run') {
+                status.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/15 text-emerald-400';
+                status.textContent = 'Ran';
+                date.textContent = new Date().toISOString().slice(0, 19).replace('T', ' ');
+                btn.className = 'px-3 py-1.5 bg-red-600/80 hover:bg-red-500 text-white text-xs font-semibold rounded-lg transition';
+                btn.textContent = 'Rollback';
+                btn.disabled = false;
+                btn.onclick = function() { runMigration(file, idx, 'rollback'); };
+              } else {
+                status.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-slate-700 text-slate-400';
+                status.textContent = 'Pending';
+                date.textContent = '—';
+                btn.className = 'px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg transition';
+                btn.textContent = 'Run';
+                btn.disabled = false;
+                btn.onclick = function() { runMigration(file, idx, 'run'); };
+              }
+            } else {
+              alert('Error: ' + (data.error || 'Unknown error'));
+              btn.disabled = false;
+              btn.textContent = action === 'run' ? 'Run' : 'Rollback';
+            }
+          })
+          .catch(() => {
+            alert('Request failed.');
+            btn.disabled = false;
+            btn.textContent = action === 'run' ? 'Run' : 'Rollback';
+          });
+        }
+        </script>
+
+      {# ── CRONS ── #}
+      {% elseif tab == 'crons' %}
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-xl font-bold text-white">Cron Jobs</h2>
+          <span class="text-xs text-slate-500">Logs auto-refresh every 5 seconds</span>
+        </div>
+
+        {% if crons is empty %}
+          <div class="text-center py-20 text-slate-500">No cron routes found in CronController.</div>
+        {% else %}
+          <div class="space-y-4 mb-8">
+            {% for cron in crons %}
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+              <div class="flex items-center justify-between gap-4">
+                <div>
+                  <p class="font-semibold text-white">{{ cron.label }}</p>
+                  <p class="text-xs text-slate-500 font-mono mt-0.5">{{ cron.path }}</p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span id="status-{{ loop.index }}" class="hidden px-2.5 py-1 rounded-full text-xs font-medium"></span>
+                  <button
+                    onclick="runCron('{{ cron.path }}', {{ loop.index }})"
+                    id="btn-{{ loop.index }}"
+                    class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-xl transition flex items-center gap-2">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Run Now
+                  </button>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {# Live log panel #}
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+          <div class="flex items-center justify-between px-5 py-3 border-b border-slate-800">
+            <span class="text-sm font-semibold text-white">Cron Log</span>
+            <span id="log-refresh-badge" class="text-xs text-slate-500">Refreshing…</span>
+          </div>
+          <div id="cron-log" class="overflow-y-auto max-h-96 font-mono text-xs p-4 space-y-1">
+            <div class="text-slate-500">Loading…</div>
+          </div>
+        </div>
+
+        <script>
+        (function () {
+          function colorLine(line) {
+            if (line.includes('[SUCCESS]')) return '<div class="text-emerald-400">' + escHtml(line) + '</div>';
+            if (line.includes('[FAILURE]') || line.includes('[ERROR]')) return '<div class="text-red-400">' + escHtml(line) + '</div>';
+            if (line.includes('[WARN]'))    return '<div class="text-amber-400">' + escHtml(line) + '</div>';
+            if (line.includes('[INFO]'))    return '<div class="text-blue-400">'  + escHtml(line) + '</div>';
+            return '<div class="text-slate-400">' + escHtml(line) + '</div>';
+          }
+
+          function escHtml(s) {
+            return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+          }
+
+          function fetchLogs() {
+            fetch('/admin/cron/logs')
+              .then(r => r.json())
+              .then(data => {
+                const el = document.getElementById('cron-log');
+                const badge = document.getElementById('log-refresh-badge');
+                if (data.lines && data.lines.length) {
+                  el.innerHTML = data.lines.map(colorLine).join('');
+                } else {
+                  el.innerHTML = '<div class="text-slate-500">No log entries yet.</div>';
+                }
+                badge.textContent = 'Updated ' + new Date().toLocaleTimeString();
+              })
+              .catch(() => {
+                document.getElementById('log-refresh-badge').textContent = 'Refresh failed';
+              });
+          }
+
+          fetchLogs();
+          setInterval(fetchLogs, 5000);
+        })();
+
+        function runCron(path, idx) {
+          const btn    = document.getElementById('btn-' + idx);
+          const status = document.getElementById('status-' + idx);
+
+          btn.disabled = true;
+          btn.innerHTML = '<svg class="w-3.5 h-3.5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg> Running…';
+          status.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/15 text-amber-400';
+          status.textContent = 'Running…';
+          status.classList.remove('hidden');
+
+          fetch('/admin/cron/run', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'path=' + encodeURIComponent(path)
+          })
+          .then(r => r.json())
+          .then(data => {
+            if (data.success) {
+              status.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/15 text-emerald-400';
+              status.textContent = '✓ ' + (data.title ? data.title.substring(0, 40) + '…' : 'Done');
+            } else {
+              status.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-red-500/15 text-red-400';
+              status.textContent = '✗ ' + (data.error || 'Failed').substring(0, 50);
+            }
+          })
+          .catch(err => {
+            status.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-red-500/15 text-red-400';
+            status.textContent = '✗ Request failed';
+          })
+          .finally(() => {
+            btn.disabled = false;
+            btn.innerHTML = '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Run Now';
+          });
+        }
+        </script>
+
+      {# ── LOGS ── #}
+      {% elseif tab == 'logs' %}
+        <h2 class="text-xl font-bold text-white mb-6">System Logs</h2>
+
+        {% for logName, lines in logs %}
+          <div class="mb-8">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-sm font-semibold text-white capitalize">{{ logName|replace({'_': ' '}) }} Log</span>
+              <span class="text-xs text-slate-500">{{ lines|length }} lines (latest first)</span>
+            </div>
+
+            {% if lines is empty %}
+              <div class="bg-slate-900 border border-slate-800 rounded-2xl px-5 py-8 text-center text-slate-500 text-sm">No log entries yet.</div>
+            {% else %}
+              <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                <div class="overflow-x-auto max-h-96 overflow-y-auto font-mono text-xs p-4 space-y-1">
+                  {% for line in lines %}
+                    {% if '[SUCCESS]' in line %}
+                      <div class="text-emerald-400">{{ line }}</div>
+                    {% elseif '[FAILURE]' in line or '[ERROR]' in line %}
+                      <div class="text-red-400">{{ line }}</div>
+                    {% elseif '[WARN]' in line %}
+                      <div class="text-amber-400">{{ line }}</div>
+                    {% elseif '[INFO]' in line %}
+                      <div class="text-blue-400">{{ line }}</div>
+                    {% else %}
+                      <div class="text-slate-400">{{ line }}</div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+
+      {# ── MAILS ── #}
+      {% elseif tab == 'mails' %}
+        <h2 class="text-xl font-bold text-white mb-6">Stored Mails <span class="text-sm font-normal text-slate-500">({{ pagination.total }} total)</span></h2>
+
+        {% if mails is empty %}
+          <div class="text-center py-20 text-slate-500">No stored mails yet.</div>
+        {% else %}
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-slate-800 text-slate-400 text-xs uppercase tracking-wide">
+                  <th class="text-left px-5 py-3">Subject</th>
+                  <th class="text-left px-5 py-3">Size</th>
+                  <th class="text-left px-5 py-3">Date</th>
+                  <th class="px-5 py-3"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for mail in mails %}
+                <tr class="border-b border-slate-800/50 hover:bg-slate-800/30 transition">
+                  <td class="px-5 py-4 text-slate-300 text-xs font-mono max-w-xs truncate" title="{{ mail.filename }}">
+                    {{ mail.filename|replace({'.html': ''}) }}
+                  </td>
+                  <td class="px-5 py-4 text-slate-400 text-xs">{{ mail.size }}</td>
+                  <td class="px-5 py-4 text-slate-400 text-xs">{{ mail.date }}</td>
+                  <td class="px-5 py-4 text-right space-x-3">
+                    <a href="/admin/mail/view/{{ mail.index }}" target="_blank"
+                      class="text-xs text-emerald-400 hover:text-emerald-300 transition">View</a>
+                    <form method="POST" action="/admin/mail/delete/{{ mail.index }}" class="inline"
+                      onsubmit="return confirm('Delete this mail?')">
+                      <button type="submit" class="text-xs text-red-400 hover:text-red-300 transition">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {{ _self.pager(pagination) }}
+        {% endif %}
+
+      {% endif %}
+    </main>
+  </div>
+
+  {# ── Pagination macro ── #}
+  {% macro pager(p) %}
+    {% if p.total_pages > 1 %}
+    <div class="flex items-center justify-between mt-6">
+      <p class="text-xs text-slate-500">
+        Page {{ p.current }} of {{ p.total_pages }} &mdash; {{ p.total }} records
+      </p>
+      <div class="flex gap-2">
+        {% if p.has_prev %}
+          <a href="{{ p.prev_url }}" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-lg transition">← Prev</a>
+        {% endif %}
+        {% for i in 1..p.total_pages %}
+          <a href="{{ p.base_url }}?page={{ i }}"
+            class="px-3 py-1.5 text-xs rounded-lg transition {{ i == p.current ? 'bg-emerald-600 text-white' : 'bg-slate-800 hover:bg-slate-700 text-slate-300' }}">
+            {{ i }}
+          </a>
+        {% endfor %}
+        {% if p.has_next %}
+          <a href="{{ p.next_url }}" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-lg transition">Next →</a>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+  {% endmacro %}
+
+</body>
+</html>

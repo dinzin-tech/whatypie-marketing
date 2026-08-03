@@ -12,6 +12,9 @@ $request = new Request();
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
+ini_set('max_execution_time', $_ENV['PHP_MAX_EXECUTION_TIME'] ?? 60);
+ini_set('memory_limit', $_ENV['PHP_MEMORY_LIMIT'] ?? '128M');
+
 $kernel = new Kernel();
 $kernel->boot();
 

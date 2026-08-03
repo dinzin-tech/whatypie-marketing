@@ -83,10 +83,37 @@
       modal.classList.remove('flex');
     }
 
-    function handleFormSubmit(e) {
+    async function handleBookingSubmit(e) {
       e.preventDefault();
-      document.getElementById('modalFormContainer').classList.add('hidden');
-      document.getElementById('modalSuccessContainer').classList.remove('hidden');
+      const form = e.target;
+      const btn = document.getElementById('bookingSubmitBtn');
+      const errorEl = document.getElementById('bookingFormError');
+
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+      errorEl.classList.add('hidden');
+
+      const body = new URLSearchParams(new FormData(form));
+
+      try {
+        const res = await fetch('/booking/submit', { method: 'POST', body });
+        const data = await res.json();
+
+        if (data.success) {
+          document.getElementById('modalFormContainer').classList.add('hidden');
+          document.getElementById('modalSuccessContainer').classList.remove('hidden');
+        } else {
+          errorEl.textContent = data.message || 'Something went wrong. Please try again.';
+          errorEl.classList.remove('hidden');
+          btn.disabled = false;
+          btn.textContent = 'Confirm & Book Session';
+        }
+      } catch {
+        errorEl.textContent = 'Network error. Please try again.';
+        errorEl.classList.remove('hidden');
+        btn.disabled = false;
+        btn.textContent = 'Confirm & Book Session';
+      }
     }
   </script>
 {% endblock %}
