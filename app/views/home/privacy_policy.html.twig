@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Privacy Policy | WhatyPie{% endblock %}
+
+{% block canonical %}https://whatypie.in/privacy-policy{% endblock %}
+
+{% block meta_description %}Read the WhatyPie Privacy Policy to understand how we collect, protect, and process your personal information.{% endblock %}
+
+{% block stylesheets %}
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } } } }
+  </script>
+  <style>
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #020617; }
+    ::-webkit-scrollbar-thumb { background: #059669; border-radius: 4px; }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+  {% include 'components/header.html.twig' %}
+
+  <!-- Policy Body -->
+  <section class="relative pt-36 pb-20 overflow-hidden flex-1">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-emerald-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="space-y-4 mb-12">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+          Legal
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Privacy Policy</h1>
+        <p class="text-xs text-slate-500">Last updated: August 3, 2026</p>
+      </div>
+
+      <div class="space-y-8 text-sm sm:text-base text-slate-300 leading-relaxed">
+        
+        <section class="space-y-3">
+          <h2 class="text-lg font-bold text-white border-b border-slate-800/80 pb-2">1. Introduction</h2>
+          <p>
+            At WhatyPie (a product of Dinzin Technology Solutions Private Limited), we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you visit our website (https://whatypie.in) and use our automation inquiry and booking services.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg font-bold text-white border-b border-slate-800/80 pb-2">2. Information We Collect</h2>
+          <p>
+            We collect personal information that you voluntarily provide to us when expressing interest in obtaining information about us or our services, or scheduling a strategy session. The information we collect includes:
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-slate-400">
+            <li><strong>Name:</strong> To address you correctly in our communications.</li>
+            <li><strong>Email Address:</strong> To send confirmations, respond to inquiries, and dispatch session updates.</li>
+            <li><strong>Phone Number:</strong> To coordinate bookings and make direct follow-ups.</li>
+            <li><strong>Company Name:</strong> To research and customize our AI solutions for your specific business requirements.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg font-bold text-white border-b border-slate-800/80 pb-2">3. How We Use Your Information</h2>
+          <p>
+            We process your information for purposes based on legitimate business interests, the fulfillment of our contract with you, compliance with our legal obligations, and/or your consent. Specifically, we use your details to:
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-slate-400">
+            <li>Schedule and manage your free AI Strategy Session.</li>
+            <li>Respond to your contact submissions and service queries.</li>
+            <li>Send administrative notifications, such as session updates or calendar invites.</li>
+            <li>Improve the functionality, design, and user experience of our platform.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg font-bold text-white border-b border-slate-800/80 pb-2">4. Data Sharing & Third-Party Protection</h2>
+          <p>
+            We do not sell, rent, trade, or otherwise share your personal information with third parties for marketing or promotional purposes. Your data is kept highly confidential and is only accessible by authorized members of our team to assist with your inquiries.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg font-bold text-white border-b border-slate-800/80 pb-2">5. Cookies and Tracking</h2>
+          <p>
+            We may use session cookies and similar tracking technologies to enhance user navigation and optimize site performance. You can set your browser to refuse all or some browser cookies, but note that some parts of this site may become inaccessible or not function properly.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg font-bold text-white border-b border-slate-800/80 pb-2">6. Your Rights & Data Requests</h2>
+          <p>
+            Depending on your location, you may have the right to request access to the personal information we collect from you, change that information, or delete it in some circumstances. To request to review, update, or delete your personal information, please submit your request to our privacy desk at <a href="mailto:contact@whatypie.in" class="text-emerald-400 hover:underline">contact@whatypie.in</a>.
+          </p>
+        </section>
+
+      </div>
+    </div>
+  </section>
+
+  {% include 'components/footer.html.twig' %}
+
+</div>
+{% endblock %}

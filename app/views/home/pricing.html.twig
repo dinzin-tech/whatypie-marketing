@@ -1,0 +1,144 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Transparent Automation Pricing Plans | WhatyPie{% endblock %}
+
+{% block canonical %}https://whatypie.in/pricing{% endblock %}
+
+{% block meta_description %}View our clear, value-based pricing plans for AI agents, custom database integrations, and official WhatsApp Business API setups.{% endblock %}
+
+{% block stylesheets %}
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } } } }
+  </script>
+  <style>
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #020617; }
+    ::-webkit-scrollbar-thumb { background: #059669; border-radius: 4px; }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+  {% include 'components/header.html.twig' %}
+
+  <!-- Page Header -->
+  <section class="relative pt-36 pb-12 overflow-hidden text-center">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-emerald-600/15 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
+      <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 text-xs font-semibold uppercase tracking-widest">
+        <span>Value-Driven Investment</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">Our Pricing Plans</h1>
+      <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto">
+        No hidden fees. We offer transparent, scope-based options tailored to your company's operational scale.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pricing Cards Grid -->
+  <section class="py-12 bg-slate-950 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        
+        <!-- Starter Plan -->
+        <div class="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition duration-300 flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <span class="text-emerald-400 font-bold text-xs uppercase tracking-wider">Starter Blueprint</span>
+            <div class="space-y-1">
+              <span class="text-3xl font-extrabold text-white">Custom Setup</span>
+              <p class="text-xs text-slate-500">Perfect for growing local businesses</p>
+            </div>
+            <ul class="space-y-2.5 text-xs text-slate-400 border-t border-slate-800/80 pt-4">
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> 1 Core AI Automation Agent</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Official WhatsApp API Integration</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Standard CRM & Calendar Sync</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Email response templates</li>
+            </ul>
+          </div>
+          <button onclick="openModal('Starter Blueprint')" class="w-full py-3 bg-slate-850 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition shadow">
+            Contact Sales
+          </button>
+        </div>
+
+        <!-- Growth Plan (Featured) -->
+        <div class="p-8 rounded-3xl bg-slate-900 border-2 border-emerald-500/50 relative shadow-[0_0_50px_rgba(16,185,129,0.15)] flex flex-col justify-between space-y-6">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-emerald-500 text-slate-950 text-[10px] font-bold uppercase tracking-wider">
+            Most Popular
+          </div>
+          <div class="space-y-4">
+            <span class="text-emerald-400 font-bold text-xs uppercase tracking-wider">Growth Suite</span>
+            <div class="space-y-1">
+              <span class="text-3xl font-extrabold text-white">Tailored Scaling</span>
+              <p class="text-xs text-emerald-400/80">Best value for established firms</p>
+            </div>
+            <ul class="space-y-2.5 text-xs text-slate-400 border-t border-slate-800/80 pt-4">
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> 3 Custom AI Automation Agents</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Multi-Agent Decision Pipelines</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Advanced CRM Sync & Automated Follow-ups</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Custom dashboard reports</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Priority architect support</li>
+            </ul>
+          </div>
+          <button onclick="openModal('Growth Suite')" class="w-full py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs rounded-xl transition shadow-lg shadow-emerald-600/20">
+            Contact Sales
+          </button>
+        </div>
+
+        <!-- Enterprise Plan -->
+        <div class="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition duration-300 flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <span class="text-emerald-400 font-bold text-xs uppercase tracking-wider">Enterprise Custom</span>
+            <div class="space-y-1">
+              <span class="text-3xl font-extrabold text-white">Full Integration</span>
+              <p class="text-xs text-slate-500">For enterprise scale & SLA criteria</p>
+            </div>
+            <ul class="space-y-2.5 text-xs text-slate-400 border-t border-slate-800/80 pt-4">
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Unlimited Custom AI Agents</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> SLA & Uptime Guarantees (99.9%+)</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Advanced database warehousing</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Dedicated engineering architect team</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Custom model training & fine-tuning</li>
+            </ul>
+          </div>
+          <button onclick="openModal('Enterprise Custom')" class="w-full py-3 bg-slate-850 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition shadow">
+            Contact Sales
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA section -->
+  <section class="py-20 bg-slate-950 relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="p-10 sm:p-16 rounded-3xl bg-slate-900/90 border border-emerald-500/30 backdrop-blur-2xl text-center space-y-8 shadow-[0_0_80px_rgba(5,150,105,0.2)]">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Have Custom Requirements?
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
+          We construct custom scope estimates matching your company's distinct goals and legacy structures.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button onclick="openModal()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 text-white font-bold text-base rounded-2xl shadow-xl shadow-emerald-600/30 hover:scale-105 transition">
+            Book Free AI Strategy Call →
+          </button>
+          <a href="https://wa.me/917411001943" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-slate-950 border border-emerald-500/30 hover:border-emerald-400 text-emerald-300 font-semibold text-base rounded-2xl transition flex items-center justify-center space-x-2 gap-2">
+            <svg class="w-5 h-5 fill-emerald-400" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.863-9.864.001-2.637-1.03-5.114-2.905-6.989-1.874-1.873-4.36-2.903-6.999-2.904-5.442 0-9.87 4.421-9.872 9.867-.001 1.8.49 3.55 1.42 5.09L1.9 22.095l6.747-1.768zm10.63-7.876c-.226-.113-1.34-.662-1.549-.739-.208-.076-.36-.113-.51.113-.15.225-.58.739-.711.89-.13.15-.26.168-.486.055-.226-.113-.956-.352-1.821-1.124-.672-.6-1.127-1.341-1.259-1.566-.131-.225-.014-.347.099-.459.102-.101.226-.263.338-.395.113-.131.15-.225.226-.375.075-.15.038-.281-.019-.394-.056-.113-.51-1.228-.699-1.687-.184-.443-.371-.383-.51-.39-.134-.007-.288-.009-.442-.009-.155 0-.407.058-.621.288-.213.23-.814.796-.814 1.942 0 1.146.833 2.251.948 2.401.115.15 1.636 2.5 3.964 3.506.553.24 1.055.399 1.416.514.557.177 1.063.152 1.464.092.446-.067 1.34-.548 1.529-1.077.19-.529.19-.983.133-1.077-.058-.094-.208-.15-.434-.263z"/></svg>
+            <span>Talk to an Automation Expert</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include 'components/footer.html.twig' %}
+  {% include 'components/booking_modal.html.twig' %}
+
+</div>
+{% endblock %}

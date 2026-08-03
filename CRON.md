@@ -18,7 +18,7 @@ The route `GET /cron/generate-blog?secret=YOUR_SECRET` triggers one full blog po
 ```env
 OPENROUTER_API_KEY=sk-or-your-key-here
 OPENROUTER_MODEL=mistralai/mistral-7b-instruct
-ALERT_EMAIL=admin@whatypie.com
+ALERT_EMAIL=admin@whatypie.in
 CRON_SECRET=generate-a-long-random-string-here
 ```
 

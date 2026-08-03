@@ -1,0 +1,202 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AI Automation by Industry | WhatyPie{% endblock %}
+
+{% block canonical %}https://whatypie.in/industries{% endblock %}
+
+{% block meta_description %}See how WhatyPie delivers industry-specific AI automation solutions for real estate, healthcare, retail, construction, travel, and NGOs.{% endblock %}
+
+{% block stylesheets %}
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } } } }
+  </script>
+  <style>
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #020617; }
+    ::-webkit-scrollbar-thumb { background: #059669; border-radius: 4px; }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+  {% include 'components/header.html.twig' %}
+
+  <!-- Page Header -->
+  <section class="relative pt-36 pb-12 overflow-hidden text-center">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-emerald-600/15 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
+      <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 text-xs font-semibold uppercase tracking-widest">
+        <span>Tailored Business Blueprints</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">Industries We Serve</h1>
+      <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto">
+        AI is not one-size-fits-all. We build custom intelligence systems fitted to the operational standards of your specific sector.
+      </p>
+    </div>
+  </section>
+
+  <!-- Industries Grid -->
+  <section class="py-12 bg-slate-950 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Industry 1: Real Estate -->
+        <a href="/industries/real-estate" class="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 space-y-6 block group">
+          <div class="text-3xl">🏢</div>
+          <div class="space-y-2">
+            <h2 class="text-xl font-bold text-white group-hover:text-emerald-300 transition">Real Estate & Construction</h2>
+            <p class="text-xs font-semibold text-emerald-400">Lead qualification & site visit booking</p>
+          </div>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+            Qualify homebuyer intent automatically from ads, distribute digital property brochures via WhatsApp, and schedule site visits directly to calendars.
+          </p>
+          <div class="flex items-center justify-between pt-2 border-t border-slate-800/80">
+            <span class="text-xs text-slate-500 font-mono">Proven client: Trilok Constructions</span>
+            <span class="text-xs font-bold text-emerald-400 group-hover:translate-x-1 transition">Explore Solution →</span>
+          </div>
+        </a>
+
+        <!-- Industry 2: E-Commerce & Retail -->
+        <a href="/industries/ecommerce" class="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 space-y-6 block group">
+          <div class="text-3xl">🛍️</div>
+          <div class="space-y-2">
+            <h2 class="text-xl font-bold text-white group-hover:text-emerald-300 transition">E-Commerce & Fashion Retail</h2>
+            <p class="text-xs font-semibold text-emerald-400">Cart abandonment & order support agents</p>
+          </div>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+            Automate tracking inquiries, send custom abandonment sequences, suggest related product catalogs, and automate customer support ticket flows.
+          </p>
+          <div class="flex items-center justify-between pt-2 border-t border-slate-800/80">
+            <span class="text-xs text-slate-500 font-mono">Proven client: Abhaya Vastra</span>
+            <span class="text-xs font-bold text-emerald-400 group-hover:translate-x-1 transition">Explore Solution →</span>
+          </div>
+        </a>
+
+        <!-- Industry 3: Healthcare & Clinics -->
+        <a href="/industries/healthcare" class="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 space-y-6 block group">
+          <div class="text-3xl">🩺</div>
+          <div class="space-y-2">
+            <h2 class="text-xl font-bold text-white group-hover:text-emerald-300 transition">Healthcare & Medicine</h2>
+            <p class="text-xs font-semibold text-emerald-400">Appointment coordination & pre-intake automation</p>
+          </div>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+            Coordinate doctor availability, confirm patient slot bookings, send automated symptom pre-intake checkups, and dispatch reminder notifications.
+          </p>
+          <div class="flex items-center justify-between pt-2 border-t border-slate-800/80">
+            <span class="text-xs text-slate-500 font-mono">DPDP & Security compliant</span>
+            <span class="text-xs font-bold text-emerald-400 group-hover:translate-x-1 transition">Explore Solution →</span>
+          </div>
+        </a>
+
+        <!-- Industry 4: NGOs & Foundations -->
+        <div class="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-emerald-500/30 transition-all duration-300 space-y-6">
+          <div class="text-3xl">🤝</div>
+          <div class="space-y-2">
+            <h2 class="text-xl font-bold text-white">NGOs & Non-Profits</h2>
+            <p class="text-xs font-semibold text-emerald-400">Volunteer coordination & donor pipelines</p>
+          </div>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+            Streamline volunteer intake questions, automate campaign update messaging, sync donation receipts, and orchestrate outreach tasks.
+          </p>
+          <div class="text-xs text-slate-500 font-mono">Proven client: Vishvam Foundation</div>
+        </div>
+
+        <!-- Industry 5: Travel & Tours -->
+        <!-- Industry 5: Travel & Tours -->
+        <a href="/industries/travel" class="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 space-y-6 block group">
+          <div class="text-3xl">✈️</div>
+          <div class="space-y-2">
+            <h2 class="text-xl font-bold text-white group-hover:text-emerald-300 transition">Travel & Aviation</h2>
+            <p class="text-xs font-semibold text-emerald-400">Itinerary customizer & booking assistant</p>
+          </div>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+            Enable instant quotation requests, qualify travel dates and budget, dispatch customized itineraries, and sync bookings with regional flight databases.
+          </p>
+          <div class="flex items-center justify-between pt-2 border-t border-slate-800/80">
+            <span class="text-xs text-slate-500 font-mono">Proven client: Yadav Tours & SkyLead</span>
+            <span class="text-xs font-bold text-emerald-400 group-hover:translate-x-1 transition">Explore Solution →</span>
+          </div>
+        </a>
+
+        <!-- Industry 6: Media & Creative Studios -->
+        <div class="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-emerald-500/30 transition-all duration-300 space-y-6">
+          <div class="text-3xl">🎬</div>
+          <div class="space-y-2">
+            <h2 class="text-xl font-bold text-white">Media & Creative Studios</h2>
+            <p class="text-xs font-semibold text-emerald-400">Client intake, onboarding & asset coordination</p>
+          </div>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+            Automate onboarding briefs, collect visual assets from clients, orchestrate creative review cycles, and trigger feedback notifications.
+          </p>
+          <div class="text-xs text-slate-500 font-mono">Proven client: Skybound Studio</div>
+        </div>
+
+        <!-- Industry 7: Education & Coaching -->
+        <a href="/industries/education" class="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 space-y-6 block group">
+          <div class="text-3xl">🎓</div>
+          <div class="space-y-2">
+            <h2 class="text-xl font-bold text-white group-hover:text-emerald-300 transition">Education & Coaching</h2>
+            <p class="text-xs font-semibold text-emerald-400">Student intake & counselor automation</p>
+          </div>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+            Automate course inquiries, qualifying student applicants, scheduling demo classes, and study abroad visa follow-ups.
+          </p>
+          <div class="flex items-center justify-between pt-2 border-t border-slate-800/80">
+            <span class="text-xs text-slate-500 font-mono">24/7 AI Admission Counselor</span>
+            <span class="text-xs font-bold text-emerald-400 group-hover:translate-x-1 transition">Explore Solution →</span>
+          </div>
+        </a>
+
+        <!-- Industry 8: Finance & Insurance -->
+        <a href="/industries/finance" class="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 space-y-6 block group">
+          <div class="text-3xl">💳</div>
+          <div class="space-y-2">
+            <h2 class="text-xl font-bold text-white group-hover:text-emerald-300 transition">Finance & Insurance</h2>
+            <p class="text-xs font-semibold text-emerald-400">Loan pre-screening & policy renewal automation</p>
+          </div>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+            Automate loan eligibility screening, policy renewal reminder flows, encrypted KYC document collection, and claim status inquiries.
+          </p>
+          <div class="flex items-center justify-between pt-2 border-t border-slate-800/80">
+            <span class="text-xs text-slate-500 font-mono">DPDP & Encrypted Compliance</span>
+            <span class="text-xs font-bold text-emerald-400 group-hover:translate-x-1 transition">Explore Solution →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA section -->
+  <section class="py-20 bg-slate-950 relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="p-10 sm:p-16 rounded-3xl bg-slate-900/90 border border-emerald-500/30 backdrop-blur-2xl text-center space-y-8 shadow-[0_0_80px_rgba(5,150,105,0.2)]">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Ready to Deploy AI in Your Industry?
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
+          Talk directly with our lead architects to customize an automation engine tailored to your sector.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button onclick="openModal()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 text-white font-bold text-base rounded-2xl shadow-xl shadow-emerald-600/30 hover:scale-105 transition">
+            Book Free AI Strategy Call →
+          </button>
+          <a href="https://wa.me/917411001943" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-slate-950 border border-emerald-500/30 hover:border-emerald-400 text-emerald-300 font-semibold text-base rounded-2xl transition flex items-center justify-center space-x-2 gap-2">
+            <svg class="w-5 h-5 fill-emerald-400" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.953-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.863-9.864.001-2.637-1.03-5.114-2.905-6.989-1.874-1.873-4.36-2.903-6.999-2.904-5.442 0-9.87 4.421-9.872 9.867-.001 1.8.49 3.55 1.42 5.09L1.9 22.095l6.747-1.768zm10.63-7.876c-.226-.113-1.34-.662-1.549-.739-.208-.076-.36-.113-.51.113-.15.225-.58.739-.711.89-.13.15-.26.168-.486.055-.226-.113-.956-.352-1.821-1.124-.672-.6-1.127-1.341-1.259-1.566-.131-.225-.014-.347.099-.459.102-.101.226-.263.338-.395.113-.131.15-.225.226-.375.075-.15.038-.281-.019-.394-.056-.113-.51-1.228-.699-1.687-.184-.443-.371-.383-.51-.39-.134-.007-.288-.009-.442-.009-.155 0-.407.058-.621.288-.213.23-.814.796-.814 1.942 0 1.146.833 2.251.948 2.401.115.15 1.636 2.5 3.964 3.506.553.24 1.055.399 1.416.514.557.177 1.063.152 1.464.092.446-.067 1.34-.548 1.529-1.077.19-.529.19-.983.133-1.077-.058-.094-.208-.15-.434-.263z"/></svg>
+            <span>Talk to an Automation Expert</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include 'components/footer.html.twig' %}
+  {% include 'components/booking_modal.html.twig' %}
+
+</div>
+{% endblock %}

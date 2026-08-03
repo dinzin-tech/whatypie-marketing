@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+Allow: /blog
+Allow: /services
+Allow: /industries
+Allow: /case-studies
+Allow: /pricing
+Allow: /about
+Allow: /privacy-policy
+Allow: /terms
+
+# Disallow admin and private paths
+Disallow: /admin/
+Disallow: /admin
+Disallow: /vendor/
+Disallow: /storage/

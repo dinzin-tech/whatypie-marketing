@@ -36,7 +36,7 @@ class OpenRouterClient
             CURLOPT_HTTPHEADER     => [
                 'Authorization: Bearer ' . $this->apiKey,
                 'Content-Type: application/json',
-                'HTTP-Referer: ' . ($_ENV['BASE_URL'] ?? 'https://whatypie.com'),
+                'HTTP-Referer: ' . ($_ENV['BASE_URL'] ?? 'https://whatypie.in'),
                 'X-Title: WhatyPie Blog Generator',
             ],
         ]);

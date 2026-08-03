@@ -1,3 +1,17 @@
+  <!-- Custom scrollbar styles for WhatsApp Chat Mockup -->
+  <style>
+    .whatsapp-chat-canvas::-webkit-scrollbar {
+      width: 5px !important;
+    }
+    .whatsapp-chat-canvas::-webkit-scrollbar-track {
+      background: #0b141a !important;
+    }
+    .whatsapp-chat-canvas::-webkit-scrollbar-thumb {
+      background: #2a3942 !important;
+      border-radius: 4px !important;
+    }
+  </style>
+
   <!-- ==================== HERO SECTION ==================== -->
   <section class="relative min-h-screen pt-32 pb-20 overflow-hidden bg-slate-950 flex flex-col justify-center">
     <!-- Green Ambient Glow -->
@@ -34,8 +48,9 @@
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
           </button>
 
-          <a href="#services" class="w-full sm:w-auto px-8 py-4 bg-slate-900/80 border border-emerald-500/30 hover:border-emerald-400 text-emerald-300 font-semibold text-base rounded-2xl backdrop-blur-md hover:text-white transition flex items-center justify-center space-x-2">
-            <span>Explore Solutions</span>
+          <a href="https://wa.me/917411001943" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-slate-900/80 border border-emerald-500/30 hover:border-emerald-400 text-emerald-300 font-semibold text-base rounded-2xl backdrop-blur-md hover:text-white transition flex items-center justify-center space-x-2 gap-2 group">
+            <svg class="w-5 h-5 fill-emerald-400 group-hover:fill-emerald-300 transition-colors flex-shrink-0" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c-.001 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            <span>Talk to an Automation Expert</span>
           </a>
         </div>
 
@@ -75,9 +90,9 @@
                     <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-[#00a884] ring-2 ring-[#202c33]"></span>
                   </div>
                   <div>
-                    <div class="text-sm font-bold text-[#e9edef] flex items-center space-x-1.5">
+                    <div class="text-sm font-bold text-[#e9edef] flex items-center gap-1.5 flex-wrap">
                       <span>WhatyPie AI Assistant</span>
-                      <span class="px-1.5 py-0.2 text-[10px] font-semibold bg-[#00a884]/20 text-[#00a884] rounded border border-[#00a884]/30">
+                      <span class="px-1.5 py-0.5 text-[9px] font-semibold bg-[#00a884]/20 text-[#00a884] rounded border border-[#00a884]/30 whitespace-nowrap">
                         Official WABA
                       </span>
                     </div>
@@ -88,11 +103,11 @@
                   </div>
                 </div>
 
-                <div class="text-[#8696a0] text-xs font-mono">WhatsApp Web UI</div>
+                <div class="text-[#8696a0] text-xs font-mono hidden md:block">WhatsApp Web UI</div>
               </div>
 
               <!-- 2. WhatsApp Chat Canvas -->
-              <div class="p-4 space-y-4 text-xs min-h-[280px] max-h-[340px] overflow-y-auto bg-[#0b141a]">
+              <div class="p-4 space-y-4 text-xs min-h-[280px] max-h-[340px] overflow-y-auto bg-[#0b141a] whatsapp-chat-canvas">
                 
                 <div class="flex justify-center my-1">
                   <span class="bg-[#111b21] text-[#8696a0] text-[10px] font-mono px-3 py-1 rounded-md border border-[#202c33]">
@@ -158,11 +173,12 @@
 
               <!-- 3. WhatsApp Bottom Input -->
               <div class="bg-[#202c33] p-3 flex items-center space-x-3 border-t border-[#2a3942]">
-                <div class="flex-1 bg-[#2a3942] rounded-xl px-4 py-2 text-xs text-[#8696a0] font-sans flex items-center justify-between">
-                  <span>Type a message or trigger AI automation...</span>
-                  <span class="text-[10px] text-[#00a884] font-mono font-semibold">AI Active</span>
+                <div class="flex-1 bg-[#2a3942] rounded-xl px-4 py-2 text-xs text-[#8696a0] font-sans flex items-center justify-between min-w-0">
+                  <span class="hidden sm:inline truncate">Type a message or trigger AI automation...</span>
+                  <span class="inline sm:hidden truncate">Type a message...</span>
+                  <span class="text-[10px] text-[#00a884] font-mono font-semibold whitespace-nowrap ml-2">AI Active</span>
                 </div>
-                <div class="w-8 h-8 rounded-full bg-[#00a884] flex items-center justify-center text-slate-950 font-bold">
+                <div class="w-8 h-8 rounded-full bg-[#00a884] flex items-center justify-center text-slate-950 font-bold shrink-0">
                   ➤
                 </div>
               </div>
@@ -186,7 +202,7 @@
 
                   <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
                     <div class="text-[11px] text-slate-400">Lead Qualification Rate</div>
-                    <div class="text-base font-extrabold text-emerald-400 font-mono">94.8% Accuracy</div>
+                    <div class="text-base font-extrabold text-emerald-400 font-mono">~95% Accuracy</div>
                   </div>
 
                   <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
@@ -201,6 +217,10 @@
                 <button onclick="openModal()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs rounded-xl transition shadow-lg shadow-emerald-600/30">
                   Book Free AI Strategy Call →
                 </button>
+                <a href="https://wa.me/917411001943" target="_blank" class="w-full inline-flex items-center justify-center py-2.5 bg-slate-900 hover:bg-slate-850 border border-slate-800 text-slate-300 font-bold text-xs rounded-xl transition gap-2">
+                  <svg class="w-3.5 h-3.5 fill-emerald-500" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.863-9.864.001-2.637-1.03-5.114-2.905-6.989-1.874-1.873-4.36-2.903-6.999-2.904-5.442 0-9.87 4.421-9.872 9.867-.001 1.8.49 3.55 1.42 5.09L1.9 22.095l6.747-1.768zm10.63-7.876c-.226-.113-1.34-.662-1.549-.739-.208-.076-.36-.113-.51.113-.15.225-.58.739-.711.89-.13.15-.26.168-.486.055-.226-.113-.956-.352-1.821-1.124-.672-.6-1.127-1.341-1.259-1.566-.131-.225-.014-.347.099-.459.102-.101.226-.263.338-.395.113-.131.15-.225.226-.375.075-.15.038-.281-.019-.394-.056-.113-.51-1.228-.699-1.687-.184-.443-.371-.383-.51-.39-.134-.007-.288-.009-.442-.009-.155 0-.407.058-.621.288-.213.23-.814.796-.814 1.942 0 1.146.833 2.251.948 2.401.115.15 1.636 2.5 3.964 3.506.553.24 1.055.399 1.416.514.557.177 1.063.152 1.464.092.446-.067 1.34-.548 1.529-1.077.19-.529.19-.983.133-1.077-.058-.094-.208-.15-.434-.263z"/></svg>
+                  <span>Talk to an Automation Expert</span>
+                </a>
               </div>
             </div>
 
@@ -234,9 +254,9 @@
         </div>
         <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800/80 text-center space-y-1">
           <div class="text-2xl sm:text-4xl font-extrabold bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
-            99.99%
+            99.9%+
           </div>
-          <div class="text-xs text-slate-300 font-medium">System Reliability & Uptime</div>
+          <div class="text-xs text-slate-300 font-medium">Uptime</div>
         </div>
       </div>
     </div>

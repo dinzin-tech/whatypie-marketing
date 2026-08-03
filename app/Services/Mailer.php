@@ -27,7 +27,7 @@ class Mailer
         ob_end_clean();
 
         // PHP mail() — actual delivery via server MTA
-        $defaultHeaders = "From: noreply@whatypie.com\r\nContent-Type: text/plain; charset=UTF-8";
+        $defaultHeaders = "From: noreply@whatypie.in\r\nContent-Type: text/plain; charset=UTF-8";
         mail($to, $subject, $body, $headers ?: $defaultHeaders);
     }
 }

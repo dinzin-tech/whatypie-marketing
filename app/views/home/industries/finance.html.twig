@@ -1,0 +1,395 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WhatsApp Automation for Finance & Insurance | WhatyPie{% endblock %}
+
+{% block canonical %}https://whatypie.in/industries/finance{% endblock %}
+
+{% block meta_description %}WhatyPie helps financial advisors, insurance agencies, and loan providers automate client lead pre-screening, policy renewal reminders, and WhatsApp CRM flows.{% endblock %}
+
+{% block stylesheets %}
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } } } }
+  </script>
+  <style>
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #020617; }
+    ::-webkit-scrollbar-thumb { background: #059669; border-radius: 4px; }
+  </style>
+
+  <!-- Structured Data: Service Schema for Financial Services Automation -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "WhatsApp & AI Automation for Finance & Insurance",
+    "serviceType": "Financial Services Automation",
+    "provider": {
+      "@type": "Organization",
+      "name": "WhatyPie",
+      "url": "https://whatypie.in",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Dinzin Technology Solutions Private Limited",
+        "url": "https://www.dinzin.in"
+      }
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "India"
+    },
+    "description": "WhatsApp automation for insurance brokers, financial advisors, loan providers, NBFCs, and wealth management firms in India."
+  }
+  </script>
+{% endblock %}
+
+{% block content %}
+<div class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+  {% include 'components/header.html.twig' %}
+
+  <!-- 1. Hero Section -->
+  <section class="relative pt-36 pb-16 overflow-hidden text-center">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[750px] h-[350px] bg-emerald-600/15 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
+      <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 text-xs font-semibold uppercase tracking-widest">
+        <span>Financial & Insurance Intelligence</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+        AI & WhatsApp Automation for Finance & Insurance
+      </h1>
+      <p class="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
+        Automate loan lead qualification, insurance policy renewals, claim status inquiries, and investment counseling — built for financial advisors, insurance brokers, NBFCs, and wealth managers. Powered by <strong class="text-emerald-400 font-semibold">WhatsApp automation for financial services</strong> and secure 24/7 AI agents.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+        <button onclick="openModal()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 text-white font-bold text-base rounded-2xl shadow-xl shadow-emerald-600/30 hover:scale-105 transition">
+          Book Free AI Strategy Call →
+        </button>
+        <a href="https://wa.me/917411001943" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-slate-950 border border-emerald-500/30 hover:border-emerald-400 text-emerald-300 font-semibold text-base rounded-2xl transition flex items-center justify-center space-x-2 gap-2">
+          <svg class="w-5 h-5 fill-emerald-400 group-hover:fill-emerald-300 transition-colors flex-shrink-0" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c-.001 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          <span>Talk to an Automation Expert</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. The Problem (6 Cards in Symmetric 3x2 Grid) -->
+  <section class="py-16 bg-slate-900/60 border-y border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Why Financial & Insurance Providers Lose Leads & Renewals Every Day
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base">
+          In financial marketing automation in India, speed and trust are everything. Here is why conventional insurance and loan desks lose clients.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800/80 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center font-bold text-lg">🏦</div>
+          <h3 class="text-lg font-bold text-white">Loan & Policy Inquiries Dropped</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Inbound loan and insurance leads from Meta ads or financial comparison portals get lost across scattered agent inboxes and spreadsheets.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800/80 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center font-bold text-lg">⚠️</div>
+          <h3 class="text-lg font-bold text-white">High Policy Lapsation Rates</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Clients forget policy renewal due dates because email or SMS reminders are ignored, causing high premium lapsation and lost commission revenue.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800/80 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center font-bold text-lg">📄</div>
+          <h3 class="text-lg font-bold text-white">Manual Document Collection</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Collecting KYC documents, salary slips, and bank statements manually via email or physical visits causes long application processing delays.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800/80 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center font-bold text-lg">📱</div>
+          <h3 class="text-lg font-bold text-white">Untracked Agent Communications</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Field agents handle policy quotes and loan details on personal WhatsApp accounts with zero corporate tracking, security, or audit logs.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800/80 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center font-bold text-lg">❓</div>
+          <h3 class="text-lg font-bold text-white">Overwhelmed Support Staff</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Support desks spend 80% of their day answering routine "What is my loan status?" or "How do I file a claim?" questions instead of resolving complex cases.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800/80 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center font-bold text-lg">🔁</div>
+          <h3 class="text-lg font-bold text-white">Poor Cross-Selling & Re-Engagement</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Existing policyholders are rarely offered health add-ons, motor renewals, or mutual fund SIPs due to a lack of automated segment broadcasting.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. How WhatyPie Solves This -->
+  <section class="py-20 bg-slate-950 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <div class="text-center max-w-3xl mx-auto space-y-4">
+        <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 text-xs font-semibold uppercase tracking-widest">
+          <span>Enterprise Financial Automation Suite</span>
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          WhatsApp & AI Automation Built for Financial Services
+        </h2>
+        <p class="text-slate-400 text-base">
+          Deliver instant financial guidance, secure document collection, and zero-lapsation renewal flows over WhatsApp.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Solution 1 -->
+        <div class="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-emerald-500/40 transition duration-300 space-y-5 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center font-bold text-2xl border border-emerald-500/30">
+              💬
+            </div>
+            <h3 class="text-xl font-bold text-white">WhatsApp Financial Engagement</h3>
+            <p class="text-xs text-emerald-400 font-medium">WhatsApp API for Insurance Brokers</p>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Deploy official Meta WhatsApp Cloud API for instant 0.2s auto-replies. Launch targeted <strong class="text-white">WhatsApp broadcast for investment & insurance offers</strong>, send tax-saving SIP guides, and collect encrypted KYC documents directly in chat.
+            </p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-400 border-t border-slate-800/80 pt-4">
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Instant Click-to-WhatsApp ad sync</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Encrypted PDF document upload intake</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Official green tick account verification</li>
+          </ul>
+        </div>
+
+        <!-- Solution 2 -->
+        <div class="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-emerald-500/40 transition duration-300 space-y-5 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center font-bold text-2xl border border-emerald-500/30">
+              🤖
+            </div>
+            <h3 class="text-xl font-bold text-white">AI Loan & Policy Screening Agent</h3>
+            <p class="text-xs text-emerald-400 font-medium">AI Agent for Loan Eligibility Inquiries</p>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Our <strong class="text-white">AI chatbot for financial advisors</strong> pre-screens applicant credit score range, employment type, monthly income, and desired coverage or loan amount before handing off pre-qualified leads to loan officers.
+            </p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-400 border-t border-slate-800/80 pt-4">
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Financial advisor lead qualification</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Automated loan eligibility pre-screening</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Multi-language Indian regional support</li>
+          </ul>
+        </div>
+
+        <!-- Solution 3 -->
+        <div class="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-emerald-500/40 transition duration-300 space-y-5 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center font-bold text-2xl border border-emerald-500/30">
+              🛡️
+            </div>
+            <h3 class="text-xl font-bold text-white">Automated Policy Renewal & Claims CRM</h3>
+            <p class="text-xs text-emerald-400 font-medium">Policy Renewal Reminder WhatsApp Automation</p>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Eliminate policy lapsations with a dedicated <strong class="text-white">WhatsApp CRM for insurance agencies</strong>. Send 30-day, 15-day, and 1-day premium due notifications with 1-click renewal payment links and automated claims status lookup.
+            </p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-400 border-t border-slate-800/80 pt-4">
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Finance CRM software India integration</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Automate claims support for insurance agencies</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> 1-Click UPI & NetBanking payment links</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Who This Is For -->
+  <section class="py-16 bg-slate-900/40 border-y border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Built for Every Segment in Finance & Insurance
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base">
+          Tailored loan and insurance lead management software designed for your compliance requirements.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
+          <div class="text-2xl">🛡️</div>
+          <h3 class="text-lg font-bold text-white">Insurance Agencies & Brokers</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Automate life, health, and motor policy renewals, dispatch policy certificates, and simplify claim intake via WhatsApp.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
+          <div class="text-2xl">💳</div>
+          <h3 class="text-lg font-bold text-white">Loan Providers & NBFCs</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Automate personal, home, and business loan pre-screening, collect income documents, and track application approval status.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
+          <div class="text-2xl">📈</div>
+          <h3 class="text-lg font-bold text-white">Wealth Managers & Advisory Firms</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Automate mutual fund SIP reminders, market updates, tax planning advisory dispatches with <strong class="text-emerald-400 font-semibold">best CRM for financial advisors in India</strong>.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. How It Works -->
+  <section class="py-20 bg-slate-950 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 text-xs font-semibold uppercase tracking-widest">
+          <span>Seamless 4-Step Financial Flow</span>
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          How Financial Automation Works
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base">
+          From initial lead inquiry or policy renewal alert to verified payment in under 2 minutes.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        
+        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3 relative">
+          <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-950 px-2.5 py-1 rounded-full border border-emerald-500/30">Step 01</span>
+          <h3 class="text-base font-bold text-white pt-2">Inquiry or Renewal Trigger</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Client requests a loan quote via Meta ad, or system triggers an automated policy renewal reminder date.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3 relative">
+          <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-950 px-2.5 py-1 rounded-full border border-emerald-500/30">Step 02</span>
+          <h3 class="text-base font-bold text-white pt-2">Instant WhatsApp AI Flow</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            AI evaluates income, loan amount, or policy details, sending instant premium quotes and KYC upload links.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3 relative">
+          <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-950 px-2.5 py-1 rounded-full border border-emerald-500/30">Step 03</span>
+          <h3 class="text-base font-bold text-white pt-2">1-Click Payment / Document</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Client uploads KYC docs securely or clicks the integrated UPI/gateway link to complete policy renewal.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3 relative">
+          <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-950 px-2.5 py-1 rounded-full border border-emerald-500/30">Step 04</span>
+          <h3 class="text-base font-bold text-white pt-2">Real-Time Core System Sync</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Policy document PDF dispatches automatically to WhatsApp while CRM logs complete transaction history.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Client Proof — PLACEHOLDER -->
+  <!-- CLIENT PROOF SECTION — add finance/insurance client logos and links here once approved. Do not fill with placeholder or fake content. -->
+
+  <!-- 7. FAQ Section -->
+  <section class="py-20 bg-slate-900/60 border-t border-slate-800/80">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div class="text-center space-y-3">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Frequently Asked Questions
+        </h2>
+        <p class="text-slate-400 text-sm">
+          Everything you need to know about implementing WhatsApp automation for financial services.
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        
+        <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+          <h3 class="text-base font-bold text-white">Is WhatsApp data secure for financial documents and KYC details?</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Yes. WhatyPie utilizes Meta's official end-to-end encrypted Cloud APIs with enterprise data encryption at rest and in transit, complying strictly with Indian DPDP data protection regulations and financial security guidelines.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+          <h3 class="text-base font-bold text-white">How does WhatsApp automation prevent insurance policy lapsation?</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            How to automate insurance policy renewal reminders on WhatsApp? WhatyPie sends scheduled multi-tier WhatsApp reminders (30 days, 15 days, 1 day prior to due date) with instant 1-click renewal payment links, increasing renewal retention by up to 45%.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+          <h3 class="text-base font-bold text-white">How fast does the AI agent evaluate loan eligibility questions?</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Our AI agent for loan eligibility inquiries evaluates applicant responses in under 0.2 seconds, automatically calculating estimated EMI options and document checklists before handing qualified leads to loan officers.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+          <h3 class="text-base font-bold text-white">Can multiple financial advisors and claim agents use separate logins under one company account?</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Yes. WhatyPie provides a multi-agent team inbox where advisors, underwriting assistants, and claims specialists can manage assigned conversations under your company's official WhatsApp Business number.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Final CTA Block -->
+  <section class="py-20 bg-slate-950 relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="p-10 sm:p-16 rounded-3xl bg-slate-900/90 border border-emerald-500/30 backdrop-blur-2xl text-center space-y-8 shadow-[0_0_80px_rgba(5,150,105,0.2)]">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Ready to automate loan leads and boost policy renewal rates?
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
+          Audit your financial sales & renewal funnels with our enterprise automation architects and deploy an official WhatsApp AI engine in under 7 days.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button onclick="openModal()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 text-white font-bold text-base rounded-2xl shadow-xl shadow-emerald-600/30 hover:scale-105 transition">
+            Book Free AI Strategy Call →
+          </button>
+          <a href="https://wa.me/917411001943" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-slate-950 border border-emerald-500/30 hover:border-emerald-400 text-emerald-300 font-semibold text-base rounded-2xl transition flex items-center justify-center space-x-2 gap-2">
+            <svg class="w-5 h-5 fill-emerald-400 group-hover:fill-emerald-300 transition-colors flex-shrink-0" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c-.001 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            <span>Talk to an Automation Expert</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include 'components/footer.html.twig' %}
+  {% include 'components/booking_modal.html.twig' %}
+
+</div>
+{% endblock %}

@@ -51,9 +51,10 @@ class ContactController extends Controller
         $workEmail   = trim($request->post('work_email', ''));
         $phoneNumber = trim($request->post('phone_number', ''));
         $companyName = trim($request->post('company_name', ''));
+        $selectedPlan = trim($request->post('selected_plan', ''));
 
-        if (!$fullName || !$workEmail || !$phoneNumber || !$companyName) {
-            return new Response(json_encode(['success' => false, 'message' => 'All fields are required.']), 422, ['Content-Type' => 'application/json']);
+        if (!$fullName || !$phoneNumber) {
+            return new Response(json_encode(['success' => false, 'message' => 'Full Name and Phone Number are required.']), 422, ['Content-Type' => 'application/json']);
         }
 
         $booking = new StrategyBooking();
@@ -61,13 +62,19 @@ class ContactController extends Controller
         $booking->work_email   = $workEmail;
         $booking->phone_number = $phoneNumber;
         $booking->company_name = $companyName;
+        if ($selectedPlan) {
+            $booking->admin_notes = "Interested Plan: " . $selectedPlan;
+        }
         $booking->save();
 
-        Mailer::send(
-            $workEmail,
-            'AI Strategy Call Requested',
-            "Hi {$fullName},\n\nYour AI Strategy Call request has been received. Our lead AI solutions architect will contact you within 2 hours to confirm your booking.\n\nCompany: {$companyName}\nPhone: {$phoneNumber}"
-        );
+        if ($workEmail) {
+            $planDetail = $selectedPlan ? "\nSelected Plan: {$selectedPlan}" : "";
+            Mailer::send(
+                $workEmail,
+                'AI Strategy Call Requested',
+                "Hi {$fullName},\n\nYour AI Strategy Call request has been received. Our lead AI solutions architect will contact you within 2 hours to confirm your booking.\n\nCompany: {$companyName}\nPhone: {$phoneNumber}{$planDetail}"
+            );
+        }
 
         return new Response(json_encode(['success' => true]), 200, ['Content-Type' => 'application/json']);
     }

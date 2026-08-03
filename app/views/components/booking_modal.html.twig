@@ -16,8 +16,8 @@
           </div>
 
           <div>
-            <label class="block text-xs text-slate-300 mb-1">Work Email *</label>
-            <input required type="email" name="work_email" placeholder="john@company.com" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
+            <label class="block text-xs text-slate-300 mb-1">Work Email</label>
+            <input type="email" name="work_email" placeholder="john@company.com" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
           </div>
 
           <div>
@@ -26,8 +26,8 @@
           </div>
 
           <div>
-            <label class="block text-xs text-slate-300 mb-1">Company Name *</label>
-            <input required type="text" name="company_name" placeholder="Acme Corp" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
+            <label class="block text-xs text-slate-300 mb-1">Company Name</label>
+            <input type="text" name="company_name" placeholder="Acme Corp" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
           </div>
 
           <button type="submit" id="bookingSubmitBtn" class="w-full py-3 bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 text-white font-bold text-sm rounded-xl shadow-lg hover:scale-[1.01] transition">
@@ -44,3 +44,99 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (menu) menu.classList.toggle('hidden');
+    }
+
+    function openModal(planName) {
+      const modal = document.getElementById('bookingModal');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+
+      const titleEl = modal.querySelector('h3');
+      const descEl = modal.querySelector('p');
+      const submitBtn = document.getElementById('bookingSubmitBtn');
+
+      if (planName) {
+        titleEl.textContent = `Contact Sales — ${planName}`;
+        descEl.textContent = `Interested in the ${planName} plan? Submit your details to request custom scope setup and pricing details.`;
+        submitBtn.textContent = `Submit Request for ${planName}`;
+
+        let planInput = document.getElementById('modalSelectedPlan');
+        if (!planInput) {
+          planInput = document.createElement('input');
+          planInput.type = 'hidden';
+          planInput.name = 'selected_plan';
+          planInput.id = 'modalSelectedPlan';
+          document.getElementById('bookingForm').appendChild(planInput);
+        }
+        planInput.value = planName;
+      } else {
+        titleEl.textContent = 'Book Your Free AI Strategy Call';
+        descEl.textContent = 'Audit your business operations with our lead AI automation architects.';
+        submitBtn.textContent = 'Confirm & Book Session';
+
+        const planInput = document.getElementById('modalSelectedPlan');
+        if (planInput) {
+          planInput.remove();
+        }
+      }
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('bookingModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      
+      // Reset success container and show form again for next opening
+      const formContainer = document.getElementById('modalFormContainer');
+      const successContainer = document.getElementById('modalSuccessContainer');
+      const form = document.getElementById('bookingForm');
+      if (formContainer && successContainer && form) {
+        formContainer.classList.remove('hidden');
+        successContainer.classList.add('hidden');
+        form.reset();
+        const btn = document.getElementById('bookingSubmitBtn');
+        btn.disabled = false;
+      }
+    }
+
+    async function handleBookingSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = document.getElementById('bookingSubmitBtn');
+      const errorEl = document.getElementById('bookingFormError');
+
+      btn.disabled = true;
+      const originalText = btn.textContent;
+      btn.textContent = 'Submitting…';
+      errorEl.classList.add('hidden');
+
+      const body = new URLSearchParams(new FormData(form));
+
+      try {
+        const res = await fetch('/booking/submit', { method: 'POST', body });
+        const data = await res.json();
+
+        if (data.success) {
+          document.getElementById('modalFormContainer').classList.add('hidden');
+          document.getElementById('modalSuccessContainer').classList.remove('hidden');
+        } else {
+          errorEl.textContent = data.message || 'Something went wrong. Please try again.';
+          errorEl.classList.remove('hidden');
+          btn.disabled = false;
+          btn.textContent = originalText;
+        }
+      } catch {
+        errorEl.textContent = 'Network error. Please try again.';
+        errorEl.classList.remove('hidden');
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }
+    }
+  </script>
