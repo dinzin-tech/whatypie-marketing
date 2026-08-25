@@ -7,6 +7,7 @@ use Core\Controller;
 use Core\Http\Request;
 use Core\Http\Response;
 use App\Services\Mailer;
+use App\Services\EmailTemplate;
 use App\Models\ContactSubmission;
 use App\Models\StrategyBooking;
 
@@ -33,11 +34,8 @@ class ContactController extends Controller
         $submission->message = $message;
         $submission->save();
 
-        Mailer::send(
-            $email,
-            'We received your message',
-            "Hi {$name},\n\nThank you for reaching out. We'll get back to you shortly.\n\nYour message:\n{$message}"
-        );
+        $htmlBody = EmailTemplate::contactConfirmation($name, $message);
+        Mailer::send($email, 'We received your message — WhatyPie', $htmlBody);
 
         return new Response(json_encode(['success' => true]), 200, ['Content-Type' => 'application/json']);
     }
@@ -76,18 +74,22 @@ class ContactController extends Controller
         $booking->save();
 
         if ($workEmail) {
-            $details = implode("\n", array_filter([
-                "Company: {$companyName}",
-                "Website: {$website}",
-                "Phone: {$phoneNumber}",
-                "Needs: {$whatYouNeed}",
-                $selectedPlan ? "Selected Plan: {$selectedPlan}" : null
-            ]));
+            $detailsArray = [
+                'Full Name'     => $fullName,
+                'Work Email'    => $workEmail,
+                'Phone Number'  => $phoneNumber,
+                'Company Name'  => $companyName,
+                'Website'       => $website,
+                'Requirements'  => $whatYouNeed,
+                'Selected Plan' => $selectedPlan,
+            ];
+
+            $htmlBody = EmailTemplate::bookingConfirmation($fullName, $detailsArray);
 
             Mailer::send(
                 $workEmail,
-                'AI Strategy Call Requested',
-                "Hi {$fullName},\n\nYour AI Strategy Call request has been received. Please choose your preferred time slot on the calendar page.\n\n{$details}"
+                'AI Strategy Call Requested — WhatyPie',
+                $htmlBody
             );
         }
 

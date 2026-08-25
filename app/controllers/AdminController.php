@@ -8,6 +8,7 @@ use Core\Http\Request;
 use Core\Http\Response;
 use Core\Session;
 use App\Services\Mailer;
+use App\Services\EmailTemplate;
 use App\Models\BlogPost;
 use App\Models\ContactSubmission;
 use App\Models\StrategyBooking;
@@ -459,10 +460,11 @@ class AdminController extends Controller
         $replyMessage = trim($request->post('reply_message', ''));
 
         if ($replyMessage) {
+            $htmlBody = EmailTemplate::adminReply($replyMessage);
             Mailer::send(
                 $contact->email,
-                'Re: ' . ($contact->subject ?: 'Your Inquiry'),
-                $replyMessage
+                'Re: ' . ($contact->subject ?: 'Your Inquiry — WhatyPie'),
+                $htmlBody
             );
             $contact->status = 'replied';
         } else {
