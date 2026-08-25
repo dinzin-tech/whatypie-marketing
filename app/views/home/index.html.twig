@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}WhatyPie — AI Automation & Business Transformation Company{% endblock %}
+{% block title %}WhatyPie — AI WhatsApp CRM for Growing Businesses{% endblock %}
 
-{% block meta_description %}Design, build, and manage AI-powered automation systems. We streamline workflows and accelerate business growth with custom AI agents.{% endblock %}
+{% block meta_description %}WhatyPie replies to every WhatsApp inquiry in seconds, books appointments automatically, and keeps every conversation organized — so your team stops losing customers to slow follow-up.{% endblock %}
 
 {% block stylesheets %}
   <!-- Tailwind CSS CDN -->
@@ -58,6 +58,10 @@
 
   {% include 'home/sections/why_us_section.html.twig' %}
 
+  {% include 'home/sections/process_section.html.twig' %}
+
+  {% include 'home/sections/faq_section.html.twig' %}
+
   {% include 'home/sections/cta_section.html.twig' %}
 
   {% include 'components/footer.html.twig' %}
@@ -68,56 +72,4 @@
 {% endblock %}
 
 {% block javascripts %}
-  <!-- JavaScript Interaction Logic -->
-  <script>
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobileMenu');
-      menu.classList.toggle('hidden');
-    }
-
-    function openModal() {
-      const modal = document.getElementById('bookingModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-
-    function closeModal() {
-      const modal = document.getElementById('bookingModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
-
-    async function handleBookingSubmit(e) {
-      e.preventDefault();
-      const form = e.target;
-      const btn = document.getElementById('bookingSubmitBtn');
-      const errorEl = document.getElementById('bookingFormError');
-
-      btn.disabled = true;
-      btn.textContent = 'Submitting…';
-      errorEl.classList.add('hidden');
-
-      const body = new URLSearchParams(new FormData(form));
-
-      try {
-        const res = await fetch('/booking/submit', { method: 'POST', body });
-        const data = await res.json();
-
-        if (data.success) {
-          document.getElementById('modalFormContainer').classList.add('hidden');
-          document.getElementById('modalSuccessContainer').classList.remove('hidden');
-        } else {
-          errorEl.textContent = data.message || 'Something went wrong. Please try again.';
-          errorEl.classList.remove('hidden');
-          btn.disabled = false;
-          btn.textContent = 'Confirm & Book Session';
-        }
-      } catch {
-        errorEl.textContent = 'Network error. Please try again.';
-        errorEl.classList.remove('hidden');
-        btn.disabled = false;
-        btn.textContent = 'Confirm & Book Session';
-      }
-    }
-  </script>
 {% endblock %}

@@ -3,13 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}SnapPHP{% endblock %}</title>
+    <title>{% block title %}WhatyPie — AI WhatsApp CRM{% endblock %}</title>
     <link rel="icon" href="{{ assets('whatypie-favicon.png') }}" type="image/png" />
     <link rel="stylesheet" href="{{ assets('css/styles.css') }}">
     <link rel="stylesheet" href="{{ assets('css/app.css') }}">
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     <link rel="canonical" href="{% block canonical %}https://whatypie.in/{% endblock %}" />
-    <meta name="description" content="{% block meta_description %}WhatyPie designs, builds, and manages AI-powered automation systems that streamline operations, reduce costs, and accelerate business growth.{% endblock %}" />
+    <meta name="description" content="{% block meta_description %}WhatyPie replies to every WhatsApp inquiry in seconds, books appointments automatically, and keeps every conversation organized.{% endblock %}" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="{% block og_title %}WhatyPie — AI WhatsApp CRM for Growing Businesses{% endblock %}" />
+    <meta property="og:description" content="{% block og_description %}Never lose another lead to a slow reply. WhatyPie automates WhatsApp responses, bookings, and follow-ups.{% endblock %}" />
+    <meta property="og:image" content="{{ assets('whatypie-og-image.png') }}" />
+    <meta property="og:url" content="{% block og_url %}https://whatypie.in/{% endblock %}" />
+    <meta property="og:type" content="website" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{% block twitter_title %}WhatyPie — AI WhatsApp CRM for Growing Businesses{% endblock %}" />
+    <meta name="twitter:description" content="{% block twitter_description %}Never lose another lead to a slow reply.{% endblock %}" />
+    <meta name="twitter:image" content="{{ assets('whatypie-og-image.png') }}" />
     {% block stylesheets %}{% endblock %}
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CL00EYQZL6"></script>
@@ -40,5 +53,10 @@
     {% block javascripts %}
     <script src="{{ assets('js/app.js') }}"></script>
     {% endblock %}
+
+    <!-- WhatyPie WhatsApp Chatbot Widget -->
+    <div data-id="6a8d31f1b71e274187601705" id="vf_root_"></div>
+    <script src="https://api.whatypie.in/uploads/widget.js" onerror="this.onerror=null;this.src='{{ assets('js/widget.js') }}';"></script>
+    <script src="{{ assets('js/widget.js') }}"></script>
 </body>
 </html>

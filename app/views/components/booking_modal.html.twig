@@ -15,32 +15,50 @@
             <input required type="text" name="full_name" placeholder="John Doe" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
           </div>
 
-          <div>
-            <label class="block text-xs text-slate-300 mb-1">Work Email</label>
-            <input type="email" name="work_email" placeholder="john@company.com" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs text-slate-300 mb-1">Work Email *</label>
+              <input required type="email" name="work_email" placeholder="john@company.com" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
+            </div>
+
+            <div>
+              <label class="block text-xs text-slate-300 mb-1">Phone Number (with Country Code) *</label>
+              <input required type="tel" name="phone_number" placeholder="+91 98765 43210" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs text-slate-300 mb-1">Company Name</label>
+              <input type="text" name="company_name" placeholder="Acme Corp" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
+            </div>
+
+            <div>
+              <label class="block text-xs text-slate-300 mb-1">Website</label>
+              <input type="url" name="website" placeholder="https://example.com" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
+            </div>
           </div>
 
           <div>
-            <label class="block text-xs text-slate-300 mb-1">Phone Number *</label>
-            <input required type="tel" name="phone_number" placeholder="+91 98765 43210" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
+            <label class="block text-xs text-slate-300 mb-1">What do you need?</label>
+            <textarea name="what_you_need" rows="2" placeholder="Tell us about your business automation or lead management requirements..." class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500"></textarea>
           </div>
 
-          <div>
-            <label class="block text-xs text-slate-300 mb-1">Company Name</label>
-            <input type="text" name="company_name" placeholder="Acme Corp" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" />
-          </div>
-
-          <button type="submit" id="bookingSubmitBtn" class="w-full py-3 bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 text-white font-bold text-sm rounded-xl shadow-lg hover:scale-[1.01] transition">
-            Confirm & Book Session
+          <button type="submit" id="bookingSubmitBtn" class="w-full py-3.5 bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 text-white font-bold text-sm rounded-xl shadow-lg hover:scale-[1.01] transition flex items-center justify-center gap-2">
+            <span>Continue to Schedule Time →</span>
           </button>
         </form>
       </div>
 
       <div id="modalSuccessContainer" class="hidden text-center py-8 space-y-4">
         <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">✓</div>
-        <h4 class="text-2xl font-bold text-white">Strategy Session Requested!</h4>
-        <p class="text-xs text-slate-300 max-w-sm mx-auto">Our lead AI solutions architect will contact you within 2 hours to confirm your calendar booking.</p>
-        <button onclick="closeModal()" class="px-6 py-2 bg-slate-800 text-white rounded-xl text-xs">Close</button>
+        <h4 class="text-2xl font-bold text-white">Redirecting to Calendly…</h4>
+        <p class="text-xs text-slate-300 max-w-sm mx-auto">Your details have been saved. Opening booking calendar to select your time slot.</p>
+        <div class="pt-2">
+          <a id="calendlyDirectLink" href="https://calendly.com/whatypie/30min?back=1&month=2026-08" class="inline-block px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition shadow-lg">
+            Click here if not redirected automatically →
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -63,8 +81,8 @@
 
       if (planName) {
         titleEl.textContent = `Contact Sales — ${planName}`;
-        descEl.textContent = `Interested in the ${planName} plan? Submit your details to request custom scope setup and pricing details.`;
-        submitBtn.textContent = `Submit Request for ${planName}`;
+        descEl.textContent = `Interested in the ${planName} plan? Submit your details to select your meeting time.`;
+        submitBtn.textContent = `Continue to Schedule Call for ${planName} →`;
 
         let planInput = document.getElementById('modalSelectedPlan');
         if (!planInput) {
@@ -78,7 +96,7 @@
       } else {
         titleEl.textContent = 'Book Your Free AI Strategy Call';
         descEl.textContent = 'Audit your business operations with our lead AI automation architects.';
-        submitBtn.textContent = 'Confirm & Book Session';
+        submitBtn.textContent = 'Continue to Schedule Time →';
 
         const planInput = document.getElementById('modalSelectedPlan');
         if (planInput) {
@@ -93,7 +111,6 @@
       modal.classList.add('hidden');
       modal.classList.remove('flex');
       
-      // Reset success container and show form again for next opening
       const formContainer = document.getElementById('modalFormContainer');
       const successContainer = document.getElementById('modalSuccessContainer');
       const form = document.getElementById('bookingForm');
@@ -102,7 +119,7 @@
         successContainer.classList.add('hidden');
         form.reset();
         const btn = document.getElementById('bookingSubmitBtn');
-        btn.disabled = false;
+        if (btn) btn.disabled = false;
       }
     }
 
@@ -112,10 +129,13 @@
       const btn = document.getElementById('bookingSubmitBtn');
       const errorEl = document.getElementById('bookingFormError');
 
-      btn.disabled = true;
-      const originalText = btn.textContent;
-      btn.textContent = 'Submitting…';
-      errorEl.classList.add('hidden');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Submitting details…';
+      }
+      if (errorEl) {
+        errorEl.classList.add('hidden');
+      }
 
       const body = new URLSearchParams(new FormData(form));
 
@@ -123,20 +143,34 @@
         const res = await fetch('/booking/submit', { method: 'POST', body });
         const data = await res.json();
 
-        if (data.success) {
+        if (data && data.success) {
           document.getElementById('modalFormContainer').classList.add('hidden');
           document.getElementById('modalSuccessContainer').classList.remove('hidden');
+          
+          const calendlyUrl = 'https://calendly.com/whatypie/30min?back=1&month=2026-08';
+          window.location.href = calendlyUrl;
+          setTimeout(function() {
+            window.location.assign(calendlyUrl);
+          }, 300);
         } else {
-          errorEl.textContent = data.message || 'Something went wrong. Please try again.';
-          errorEl.classList.remove('hidden');
-          btn.disabled = false;
-          btn.textContent = originalText;
+          if (errorEl) {
+            errorEl.textContent = (data && data.message) ? data.message : 'Something went wrong. Please try again.';
+            errorEl.classList.remove('hidden');
+          }
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = 'Continue to Schedule Time →';
+          }
         }
-      } catch {
-        errorEl.textContent = 'Network error. Please try again.';
-        errorEl.classList.remove('hidden');
-        btn.disabled = false;
-        btn.textContent = originalText;
+      } catch (err) {
+        if (errorEl) {
+          errorEl.textContent = 'Network error. Please try again.';
+          errorEl.classList.remove('hidden');
+        }
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = 'Continue to Schedule Time →';
+        }
       }
     }
   </script>

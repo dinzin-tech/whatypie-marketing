@@ -47,14 +47,16 @@ class ContactController extends Controller
      */
     public function submitBooking(Request $request): Response
     {
-        $fullName    = trim($request->post('full_name', ''));
-        $workEmail   = trim($request->post('work_email', ''));
-        $phoneNumber = trim($request->post('phone_number', ''));
-        $companyName = trim($request->post('company_name', ''));
+        $fullName     = trim($request->post('full_name', ''));
+        $workEmail    = trim($request->post('work_email', ''));
+        $phoneNumber  = trim($request->post('phone_number', ''));
+        $companyName  = trim($request->post('company_name', ''));
+        $website      = trim($request->post('website', ''));
+        $whatYouNeed  = trim($request->post('what_you_need', ''));
         $selectedPlan = trim($request->post('selected_plan', ''));
 
-        if (!$fullName || !$phoneNumber) {
-            return new Response(json_encode(['success' => false, 'message' => 'Full Name and Phone Number are required.']), 422, ['Content-Type' => 'application/json']);
+        if (!$fullName || !$phoneNumber || !$workEmail) {
+            return new Response(json_encode(['success' => false, 'message' => 'Full Name, Work Email, and Phone Number are required.']), 422, ['Content-Type' => 'application/json']);
         }
 
         $booking = new StrategyBooking();
@@ -62,17 +64,30 @@ class ContactController extends Controller
         $booking->work_email   = $workEmail;
         $booking->phone_number = $phoneNumber;
         $booking->company_name = $companyName;
-        if ($selectedPlan) {
-            $booking->admin_notes = "Interested Plan: " . $selectedPlan;
+        
+        $notes = [];
+        if ($website)     $notes[] = "Website: {$website}";
+        if ($whatYouNeed) $notes[] = "Needs: {$whatYouNeed}";
+        if ($selectedPlan) $notes[] = "Plan: {$selectedPlan}";
+        if (!empty($notes)) {
+            $booking->admin_notes = implode(" | ", $notes);
         }
+        
         $booking->save();
 
         if ($workEmail) {
-            $planDetail = $selectedPlan ? "\nSelected Plan: {$selectedPlan}" : "";
+            $details = implode("\n", array_filter([
+                "Company: {$companyName}",
+                "Website: {$website}",
+                "Phone: {$phoneNumber}",
+                "Needs: {$whatYouNeed}",
+                $selectedPlan ? "Selected Plan: {$selectedPlan}" : null
+            ]));
+
             Mailer::send(
                 $workEmail,
                 'AI Strategy Call Requested',
-                "Hi {$fullName},\n\nYour AI Strategy Call request has been received. Our lead AI solutions architect will contact you within 2 hours to confirm your booking.\n\nCompany: {$companyName}\nPhone: {$phoneNumber}{$planDetail}"
+                "Hi {$fullName},\n\nYour AI Strategy Call request has been received. Please choose your preferred time slot on the calendar page.\n\n{$details}"
             );
         }
 
