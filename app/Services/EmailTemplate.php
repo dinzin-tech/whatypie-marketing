@@ -40,7 +40,7 @@ class EmailTemplate
           <tr>
             <td align="center" style="padding-bottom: 24px;">
               <a href="https://whatypie.in" target="_blank">
-                <img src="https://whatypie.in/assets/whatypie-logo.png" alt="WhatyPie Logo" width="180" style="display: block; width: 180px; max-width: 180px; height: auto;" />
+                <img src="https://whatypie.in/public/assets/whatypie-logo.png" alt="WhatyPie Logo" width="180" style="display: block; width: 180px; max-width: 180px; height: auto;" />
               </a>
             </td>
           </tr>
